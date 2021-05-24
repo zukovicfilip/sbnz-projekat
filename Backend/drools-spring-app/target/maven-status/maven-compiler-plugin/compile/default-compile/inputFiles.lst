@@ -1,5 +1,9 @@
-/home/zukovicfilip/Desktop/Sistemi bazirani na znanju/Vezbe/Vezbe 3/drools-spring/drools-spring-app/src/main/java/sbnz/integracija/example/facts/Item.java
-/home/zukovicfilip/Desktop/Sistemi bazirani na znanju/Vezbe/Vezbe 3/drools-spring/drools-spring-app/src/main/java/sbnz/integracija/example/SampleAppController.java
-/home/zukovicfilip/Desktop/Sistemi bazirani na znanju/Vezbe/Vezbe 3/drools-spring/drools-spring-app/src/main/java/sbnz/integracija/example/SampleApp.java
-/home/zukovicfilip/Desktop/Sistemi bazirani na znanju/Vezbe/Vezbe 3/drools-spring/drools-spring-app/src/main/java/sbnz/integracija/example/SampleHomeController.java
-/home/zukovicfilip/Desktop/Sistemi bazirani na znanju/Vezbe/Vezbe 3/drools-spring/drools-spring-app/src/main/java/sbnz/integracija/example/SampleAppService.java
+/home/zukovicfilip/Desktop/Sistemi bazirani na znanju/sbnz-projekat/Backend/drools-spring-app/src/main/java/sbnz/integracija/example/Application.java
+/home/zukovicfilip/Desktop/Sistemi bazirani na znanju/sbnz-projekat/Backend/drools-spring-app/src/main/java/sbnz/integracija/example/model/User.java
+/home/zukovicfilip/Desktop/Sistemi bazirani na znanju/sbnz-projekat/Backend/drools-spring-app/src/main/java/sbnz/integracija/example/service/UserService.java
+/home/zukovicfilip/Desktop/Sistemi bazirani na znanju/sbnz-projekat/Backend/drools-spring-app/src/main/java/sbnz/integracija/example/facts/Item.java
+/home/zukovicfilip/Desktop/Sistemi bazirani na znanju/sbnz-projekat/Backend/drools-spring-app/src/main/java/sbnz/integracija/example/service/implementation/UserServiceImpl.java
+/home/zukovicfilip/Desktop/Sistemi bazirani na znanju/sbnz-projekat/Backend/drools-spring-app/src/main/java/sbnz/integracija/example/controller/dtos/RegisterDTO.java
+/home/zukovicfilip/Desktop/Sistemi bazirani na znanju/sbnz-projekat/Backend/drools-spring-app/src/main/java/sbnz/integracija/example/controller/AuthenticationController.java
+/home/zukovicfilip/Desktop/Sistemi bazirani na znanju/sbnz-projekat/Backend/drools-spring-app/src/main/java/sbnz/integracija/example/model/enums/Role.java
+/home/zukovicfilip/Desktop/Sistemi bazirani na znanju/sbnz-projekat/Backend/drools-spring-app/src/main/java/sbnz/integracija/example/repository/UserRepository.java

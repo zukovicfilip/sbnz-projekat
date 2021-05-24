@@ -1,6 +1,10 @@
+sbnz/integracija/example/model/User.class
+sbnz/integracija/example/service/implementation/UserServiceImpl.class
+sbnz/integracija/example/controller/AuthenticationController.class
 sbnz/integracija/example/facts/Item$Category.class
-sbnz/integracija/example/SampleApp.class
-sbnz/integracija/example/SampleHomeController.class
-sbnz/integracija/example/SampleAppController.class
-sbnz/integracija/example/SampleAppService.class
 sbnz/integracija/example/facts/Item.class
+sbnz/integracija/example/Application.class
+sbnz/integracija/example/controller/dtos/RegisterDTO.class
+sbnz/integracija/example/model/enums/Role.class
+sbnz/integracija/example/service/UserService.class
+sbnz/integracija/example/repository/UserRepository.class
