@@ -8,7 +8,7 @@ import sbnz.integracija.example.model.enums.Role;
 import javax.persistence.*;
 import java.util.UUID;
 
-@Entity(name = "user")
+@Entity(name = "registered_user")
 public class User {
 
     @Id
