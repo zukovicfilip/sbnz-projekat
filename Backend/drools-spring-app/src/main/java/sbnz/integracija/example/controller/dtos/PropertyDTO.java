@@ -1,40 +1,34 @@
-package sbnz.integracija.example.model;
+package sbnz.integracija.example.controller.dtos;
 
-import org.hibernate.annotations.GenericGenerator;
-import org.joda.time.LocalDate;
+import sbnz.integracija.example.model.Amenity;
+import sbnz.integracija.example.model.Coordinates;
+import sbnz.integracija.example.model.User;
 
-import javax.persistence.*;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import java.util.List;
 import java.util.UUID;
 
-@Entity(name = "property")
-public class Property {
-
-    @Id
-    @GeneratedValue(generator = "UUID")
-    @GenericGenerator(
-            name = "UUID", strategy = "org.hibernate.id.UUIDGenerator"
-    )
+public class PropertyDTO {
     private UUID id;
-
     private double surface;
-
-    @Embedded
     private Coordinates coordinates;
-
     private double pricePerSquareM;
-
     private int numberOfRooms;
-
     private int buildDate;
-
-    @ManyToOne
     private User owner;
 
-    @ManyToMany
-    private List<Amenity> amenities;
+    public PropertyDTO(UUID id, double surface, Coordinates coordinates, double pricePerSquareM, int numberOfRooms, int buildDate, User owner) {
+        this.id = id;
+        this.surface = surface;
+        this.coordinates = coordinates;
+        this.pricePerSquareM = pricePerSquareM;
+        this.numberOfRooms = numberOfRooms;
+        this.buildDate = buildDate;
+        this.owner = owner;
+    }
 
-    public Property() {
+    public PropertyDTO() {
     }
 
     public UUID getId() {
@@ -83,14 +77,6 @@ public class Property {
 
     public void setBuildDate(int buildDate) {
         this.buildDate = buildDate;
-    }
-
-    public List<Amenity> getAmenities() {
-        return amenities;
-    }
-
-    public void setAmenities(List<Amenity> amenities) {
-        this.amenities = amenities;
     }
 
     public User getOwner() {
