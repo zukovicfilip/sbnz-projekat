@@ -13,15 +13,17 @@ public class PropertyDTO {
     private UUID id;
     private double surface;
     private Coordinates coordinates;
+    private String address;
     private double pricePerSquareM;
     private int numberOfRooms;
     private int buildDate;
     private User owner;
 
-    public PropertyDTO(UUID id, double surface, Coordinates coordinates, double pricePerSquareM, int numberOfRooms, int buildDate, User owner) {
+    public PropertyDTO(UUID id, double surface, Coordinates coordinates, String address, double pricePerSquareM, int numberOfRooms, int buildDate, User owner) {
         this.id = id;
         this.surface = surface;
         this.coordinates = coordinates;
+        this.address = address;
         this.pricePerSquareM = pricePerSquareM;
         this.numberOfRooms = numberOfRooms;
         this.buildDate = buildDate;
@@ -85,5 +87,13 @@ public class PropertyDTO {
 
     public void setOwner(User owner) {
         this.owner = owner;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 }

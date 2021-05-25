@@ -22,6 +22,8 @@ public class Property {
     @Embedded
     private Coordinates coordinates;
 
+    private String address;
+
     private double pricePerSquareM;
 
     private int numberOfRooms;
@@ -83,6 +85,14 @@ public class Property {
 
     public void setBuildDate(int buildDate) {
         this.buildDate = buildDate;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public List<Amenity> getAmenities() {

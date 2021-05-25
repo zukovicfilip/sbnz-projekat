@@ -5,7 +5,7 @@
         <div class="text-h6">
           {{ property.address }}
         </div>
-        <div class="text-left">Build year: {{ property.buildYear }}</div>
+        <div class="text-left">Build year: {{ property.buildDate }}</div>
         <div class="text-left">Price per square meter: {{ property.pricePerSquareM }}</div>
         <div class="text-left">Surface: {{ property.surface }} m2</div>
         <div class="text-left">Number of rooms: {{ property.numberOfRooms }} m2</div>
@@ -28,7 +28,7 @@ export default {
           pricePerSquareM: 0.0,
           surface: 0.0,
           numberOfRooms: 0,
-          buildYear: 0
+          buildDate: 0
         };
       }
     }

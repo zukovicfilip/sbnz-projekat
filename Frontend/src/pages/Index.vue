@@ -23,29 +23,29 @@
 
 <script>
 import PropertyCard from "./../components/PropertyCard";
+import PropertyService from "./../services/PropertyService";
+import {errorFetchingData} from "./../notifications/globalErrors";
+
 export default {
   components: { PropertyCard },
+  beforeMount() {
+    this.getAllProperties()
+  },
   data() {
     return {
       properties: [
-        {
-          id: 1,
-          address: "Antona Cehova 9",
-          pricePerSquareM: 1600,
-          surface: 45,
-          numberOfRooms: 2,
-          buildYear: 1998
-        },
-        {
-          id: 2,
-          address: "Mihajla Pupina 12",
-          pricePerSquareM: 2000,
-          surface: 125,
-          numberOfRooms: 5,
-          buildYear: 1988
-        }
       ]
     };
+  },
+  methods: {
+    async getAllProperties() {
+      let response = await PropertyService.getAllProperties()
+      if(response.status === 200){
+        this.properties = [...response.data]
+      }else{
+        errorFetchingData()
+      } 
+    },
   }
 };
 </script>

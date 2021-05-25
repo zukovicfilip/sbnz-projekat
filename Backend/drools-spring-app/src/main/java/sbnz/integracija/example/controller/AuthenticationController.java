@@ -10,7 +10,6 @@ import sbnz.integracija.example.service.UserService;
 
 @RestController
 @RequestMapping(value = "/api/auth")
-@CrossOrigin
 public class AuthenticationController {
 
     @Autowired

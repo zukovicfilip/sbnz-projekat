@@ -26,6 +26,7 @@ public class PropertyServiceImpl implements PropertyService {
             propertyDTO.setId(property.getId());
             propertyDTO.setBuildDate(property.getBuildDate());
             propertyDTO.setCoordinates(property.getCoordinates());
+            propertyDTO.setAddress(property.getAddress());
             propertyDTO.setOwner(property.getOwner());
             propertyDTO.setSurface(property.getSurface());
             propertyDTO.setPricePerSquareM(property.getPricePerSquareM());
