@@ -1,0 +1,92 @@
+package sbnz.integracija;
+
+import sbnz.integracija.example.model.search.ScoredProperty
+import sbnz.integracija.example.model.search.Scaler
+import sbnz.integracija.example.controller.dtos.SearchDTO
+
+rule "Has car" salience 2
+    agenda-group "scaling"
+    when
+        $sp: ScoredProperty(scaler.getFiredRules() not contains "Has car");
+        $s: SearchDTO(hasCar == true);
+    then
+        $sp.getScaler().setDistanceScale(2);
+        $sp.getScaler().getFiredRules().add("Has car");
+        update($sp);
+end
+
+rule "Has kids" salience 2
+    agenda-group "scaling"
+    when
+        $sp: ScoredProperty(scaler.getFiredRules() not contains "Has kids");
+        $s: SearchDTO(kids == true);
+   then
+        $sp.getScaler().setHospitalScale(
+            $sp.getScaler().getHospitalScale() + 1
+        );
+        $sp.getScaler().setKindergartenScale(
+            $sp.getScaler().getKindergartenScale() + 1.5
+        );
+        $sp.getScaler().setSchoolScale(
+            $sp.getScaler().getSchoolScale() + 2
+        );
+        $sp.getScaler().setSupermarketScale(
+            $sp.getScaler().getSupermarketScale() + 0.5
+        );
+        $sp.getScaler().getFiredRules().add("Has kids");
+        update($sp);
+end
+
+rule "Younger person" salience 2
+    agenda-group "scaling"
+    when
+        $sp: ScoredProperty(scaler.getFiredRules() not contains "Younger person");
+        $s: SearchDTO(younger > 0);
+    then
+        $sp.getScaler().setUniversityScale(
+            $sp.getScaler().getUniversityScale() + 1
+        );
+        $sp.getScaler().setNightClubScale(
+            $sp.getScaler().getNightClubScale() + 1
+        );
+        $sp.getScaler().setShoppingCenterScale(
+            $sp.getScaler().getShoppingCenterScale() + 0.5
+        );
+        $sp.getScaler().getFiredRules().add("Younger person");
+        update($sp);
+end
+
+rule "Middle aged person" salience 2
+    agenda-group "scaling"
+    when
+        $sp: ScoredProperty(scaler.getFiredRules() not contains "Middle aged person");
+        $s: SearchDTO(middleAged > 0);
+    then
+        $sp.getScaler().setBankScale(
+            $sp.getScaler().getBankScale() + 0.5
+        );
+        $sp.getScaler().setRestaurantScale(
+            $sp.getScaler().getRestaurantScale() + 0.5
+        );
+        $sp.getScaler().getFiredRules().add("Middle aged person");
+        update($sp);
+end
+
+rule "Older person" salience 2
+    agenda-group "scaling"
+    when
+        $sp: ScoredProperty(scaler.getFiredRules() not contains "Older person");
+        $s: SearchDTO(older > 0);
+    then
+        $sp.getScaler().setHospitalScale(
+            $sp.getScaler().getHospitalScale() + 2.5
+        );
+        $sp.getScaler().setShoppingCenterScale(
+            $sp.getScaler().getShoppingCenterScale() + 0.5
+        );
+        $sp.getScaler().setParkScale(
+            $sp.getScaler().getParkScale() + 2.5
+        );
+        $sp.getScaler().getFiredRules().add("Older person");
+        update($sp);
+end

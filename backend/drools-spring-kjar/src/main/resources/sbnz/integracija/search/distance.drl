@@ -1,0 +1,173 @@
+package sbnz.integracija;
+
+import sbnz.integracija.example.model.persistance.ObjectOfInterest
+import sbnz.integracija.example.model.enums.ObjectOfInterestType
+import sbnz.integracija.example.model.search.ScoredProperty
+
+rule "Calculate kindergarten distance score" salience 1
+    agenda-group "distance_score_calculation"
+    when
+        $ooi: ObjectOfInterest(type.equals(ObjectOfInterestType.KINDERGARTEN))
+        $ps: ScoredProperty(
+            scaler.getFiredRules() not contains String.format("Calculate kindergarten distance score %s", $ooi.getId())
+        )
+    then
+        double score = $ps.getScaler().getDistanceScale() / $ooi.calculateDistance($ps.getProperty()) * $ps.getScaler().getKindergartenScale();
+        $ps.setScore($ps.getScore() + score);
+        $ps.getScaler().getFiredRules().add(String.format("Calculate kindergarten distance score %s", $ooi.getId()));
+        update($ps);
+end
+
+rule "Calculate school distance score" salience 1
+    agenda-group "distance_score_calculation"
+    when
+        $ooi: ObjectOfInterest(type.equals(ObjectOfInterestType.SCHOOL))
+        $ps: ScoredProperty(
+            scaler.getFiredRules() not contains String.format("Calculate school distance score %s", $ooi.getId())
+        )
+    then
+        double score = $ps.getScaler().getDistanceScale() / $ooi.calculateDistance($ps.getProperty()) * $ps.getScaler().getSchoolScale();
+        $ps.setScore($ps.getScore() + score);
+        $ps.getScaler().getFiredRules().add(String.format("Calculate school distance score %s", $ooi.getId()));
+        update($ps);
+end
+
+rule "Calculate university distance score" salience 1
+    agenda-group "distance_score_calculation"
+    when
+        $ooi: ObjectOfInterest(type.equals(ObjectOfInterestType.UNIVERSITY))
+        $ps: ScoredProperty(
+            scaler.getFiredRules() not contains String.format("Calculate university distance score %s", $ooi.getId())
+        )
+    then
+        double score = $ps.getScaler().getDistanceScale() / $ooi.calculateDistance($ps.getProperty()) * $ps.getScaler().getUniversityScale();
+        $ps.setScore($ps.getScore() + score);
+        $ps.getScaler().getFiredRules().add(String.format("Calculate university distance score %s", $ooi.getId()));
+        update($ps);
+end
+
+rule "Calculate hospital distance score" salience 1
+    agenda-group "distance_score_calculation"
+    when
+        $ooi: ObjectOfInterest(type.equals(ObjectOfInterestType.HOSPITAL))
+        $ps: ScoredProperty(
+            scaler.getFiredRules() not contains String.format("Calculate hospital distance score %s", $ooi.getId())
+        )
+    then
+        double score = $ps.getScaler().getDistanceScale() / $ooi.calculateDistance($ps.getProperty()) * $ps.getScaler().getHospitalScale();
+        $ps.setScore($ps.getScore() + score);
+        $ps.getScaler().getFiredRules().add(String.format("Calculate hospital distance score %s", $ooi.getId()));
+        update($ps);
+end
+
+rule "Calculate bank distance score" salience 1
+    agenda-group "distance_score_calculation"
+    when
+        $ooi: ObjectOfInterest(type.equals(ObjectOfInterestType.BANK))
+        $ps: ScoredProperty(
+            scaler.getFiredRules() not contains String.format("Calculate bank distance score %s", $ooi.getId())
+        )
+    then
+        double score = $ps.getScaler().getDistanceScale() / $ooi.calculateDistance($ps.getProperty()) * $ps.getScaler().getBankScale();
+        $ps.setScore($ps.getScore() + score);
+        $ps.getScaler().getFiredRules().add(String.format("Calculate bank distance score %s", $ooi.getId()));
+        update($ps);
+end
+
+rule "Calculate park distance score" salience 1
+    agenda-group "distance_score_calculation"
+    when
+        $ooi: ObjectOfInterest(type.equals(ObjectOfInterestType.PARK))
+        $ps: ScoredProperty(
+            scaler.getFiredRules() not contains String.format("Calculate park distance score %s", $ooi.getId())
+        )
+    then
+        double score = $ps.getScaler().getDistanceScale() / $ooi.calculateDistance($ps.getProperty()) * $ps.getScaler().getParkScale();
+        $ps.setScore($ps.getScore() + score);
+        $ps.getScaler().getFiredRules().add(String.format("Calculate park distance score %s", $ooi.getId()));
+        update($ps);
+end
+
+rule "Calculate gym distance score" salience 1
+    agenda-group "distance_score_calculation"
+    when
+        $ooi: ObjectOfInterest(type.equals(ObjectOfInterestType.GYM))
+        $ps: ScoredProperty(
+            scaler.getFiredRules() not contains String.format("Calculate gym distance score %s", $ooi.getId())
+        )
+    then
+        double score = $ps.getScaler().getDistanceScale() / $ooi.calculateDistance($ps.getProperty()) * $ps.getScaler().getGymScale();
+        $ps.setScore($ps.getScore() + score);
+        $ps.getScaler().getFiredRules().add(String.format("Calculate gym distance score %s", $ooi.getId()));
+        update($ps);
+end
+
+rule "Calculate restaurant distance score" salience 1
+    agenda-group "distance_score_calculation"
+    when
+        $ooi: ObjectOfInterest(type.equals(ObjectOfInterestType.RESTAURANT))
+        $ps: ScoredProperty(
+            scaler.getFiredRules() not contains String.format("Calculate restaurant distance score %s", $ooi.getId())
+        )
+    then
+        double score = $ps.getScaler().getDistanceScale() / $ooi.calculateDistance($ps.getProperty()) * $ps.getScaler().getRestaurantScale();
+        $ps.setScore($ps.getScore() + score);
+        $ps.getScaler().getFiredRules().add(String.format("Calculate restaurant distance score %s", $ooi.getId()));
+        update($ps);
+end
+
+rule "Calculate cinema distance score" salience 1
+    agenda-group "distance_score_calculation"
+    when
+        $ooi: ObjectOfInterest(type.equals(ObjectOfInterestType.CINEMA))
+        $ps: ScoredProperty(
+            scaler.getFiredRules() not contains String.format("Calculate cinema distance score %s", $ooi.getId())
+        )
+    then
+        double score = $ps.getScaler().getDistanceScale() / $ooi.calculateDistance($ps.getProperty()) * $ps.getScaler().getCinemaScale();
+        $ps.setScore($ps.getScore() + score);
+        $ps.getScaler().getFiredRules().add(String.format("Calculate cinema distance score %s", $ooi.getId()));
+        update($ps);
+end
+
+rule "Calculate supermarket distance score" salience 1
+    agenda-group "distance_score_calculation"
+    when
+        $ooi: ObjectOfInterest(type.equals(ObjectOfInterestType.SUPERMARKET))
+        $ps: ScoredProperty(
+            scaler.getFiredRules() not contains String.format("Calculate supermarket distance score %s", $ooi.getId())
+        )
+    then
+        double score = $ps.getScaler().getDistanceScale() / $ooi.calculateDistance($ps.getProperty()) * $ps.getScaler().getSupermarketScale();
+        $ps.setScore($ps.getScore() + score);
+        $ps.getScaler().getFiredRules().add(String.format("Calculate supermarket distance score %s", $ooi.getId()));
+        update($ps);
+end
+
+rule "Calculate shopping center distance score" salience 1
+    agenda-group "distance_score_calculation"
+    when
+        $ooi: ObjectOfInterest(type.equals(ObjectOfInterestType.SHOPPING_CENTER))
+        $ps: ScoredProperty(
+            scaler.getFiredRules() not contains String.format("Calculate shopping center distance score %s", $ooi.getId())
+        )
+    then
+        double score = $ps.getScaler().getDistanceScale() / $ooi.calculateDistance($ps.getProperty()) * $ps.getScaler().getShoppingCenterScale();
+        $ps.setScore($ps.getScore() + score);
+        $ps.getScaler().getFiredRules().add(String.format("Calculate shopping center distance score %s", $ooi.getId()));
+        update($ps);
+end
+
+rule "Calculate night club distance score" salience 1
+    agenda-group "distance_score_calculation"
+    when
+        $ooi: ObjectOfInterest(type.equals(ObjectOfInterestType.NIGHT_CLUB))
+        $ps: ScoredProperty(
+            scaler.getFiredRules() not contains String.format("Calculate night club distance score %s", $ooi.getId())
+        )
+    then
+        double score = $ps.getScaler().getDistanceScale() / $ooi.calculateDistance($ps.getProperty()) * $ps.getScaler().getNightClubScale();
+        $ps.setScore($ps.getScore() + score);
+        $ps.getScaler().getFiredRules().add(String.format("Calculate night club distance score %s", $ooi.getId()));
+        update($ps);
+end

@@ -1,0 +1,22 @@
+package sbnz.integracija;
+
+import sbnz.integracija.example.model.search.ScoredProperty
+import sbnz.integracija.example.model.search.ScoredProperties
+import java.util.List
+import java.util.ArrayList
+
+rule "Add to return list"
+salience $score
+agenda-group "finishing"
+no-loop
+    when
+        $ps: ScoredProperty($score: score);
+        $sp: ScoredProperties();
+    then
+        System.out.println(String.format("Property in %s has score %s", $ps.getProperty().getAddress(), $ps.getScore()));
+        List<ScoredProperty> appendedList = new ArrayList<ScoredProperty>($sp.getScoredProperties());
+        appendedList.add($ps);
+
+        $sp.setScoredProperties(appendedList);
+        update($sp)
+end
