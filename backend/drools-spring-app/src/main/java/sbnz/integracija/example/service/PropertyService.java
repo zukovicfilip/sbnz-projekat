@@ -1,19 +1,18 @@
 package sbnz.integracija.example.service;
 
 import sbnz.integracija.example.controller.dtos.FilterDTO;
-import sbnz.integracija.example.controller.dtos.PropertyDTO;
-import sbnz.integracija.example.controller.dtos.ScoredPropertyDTO;
-import sbnz.integracija.example.controller.dtos.SearchDTO;
+import sbnz.integracija.example.controller.dtos.ScoreDTO;
+import sbnz.integracija.example.model.persistance.Property;
 import sbnz.integracija.example.model.search.ScoredProperty;
 
 import java.util.List;
 
 public interface PropertyService {
 
-    List<PropertyDTO> getAllProperties();
+    List<Property> getAllProperties();
 
-    List<ScoredPropertyDTO> searchProperties(SearchDTO searchDTO);
+    List<ScoredProperty> scoreProperties(ScoreDTO scoreDTO, List<Property> properties);
 
-    List<PropertyDTO> filterProperties(FilterDTO filterDTO);
+    List<Property> filterProperties(FilterDTO filterDTO);
 
 }

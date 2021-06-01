@@ -5,9 +5,7 @@ import org.kie.api.runtime.KieSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import sbnz.integracija.example.controller.dtos.FilterDTO;
-import sbnz.integracija.example.controller.dtos.PropertyDTO;
-import sbnz.integracija.example.controller.dtos.ScoredPropertyDTO;
-import sbnz.integracija.example.controller.dtos.SearchDTO;
+import sbnz.integracija.example.controller.dtos.ScoreDTO;
 import sbnz.integracija.example.model.persistance.ObjectOfInterest;
 import sbnz.integracija.example.model.persistance.Property;
 import sbnz.integracija.example.model.search.FilteredProperties;
@@ -37,25 +35,11 @@ public class PropertyServiceImpl implements PropertyService {
     }
 
     @Override
-    public List<PropertyDTO> getAllProperties() {
-        List<Property> properties = propertyRepository.getAll();
-        List<PropertyDTO> propertyDTOs = new ArrayList<>();
-        for(Property property : properties) {
-            PropertyDTO propertyDTO = new PropertyDTO();
-            propertyDTO.setId(property.getId());
-            propertyDTO.setBuildDate(property.getBuildDate());
-            propertyDTO.setCoordinates(property.getCoordinates());
-            propertyDTO.setAddress(property.getAddress());
-            propertyDTO.setOwner(property.getOwner());
-            propertyDTO.setSurface(property.getSurface());
-            propertyDTO.setPricePerSquareM(property.getPricePerSquareM());
-            propertyDTO.setNumberOfRooms(property.getNumberOfRooms());
-            propertyDTOs.add(propertyDTO);
-        }
-        return propertyDTOs;
+    public List<Property> getAllProperties() {
+        return propertyRepository.getAll();
     }
 
-    public List<PropertyDTO> filterProperties(FilterDTO filterDTO) {
+    public List<Property> filterProperties(FilterDTO filterDTO) {
         List<Property> properties = propertyRepository.getAll();
         FilteredProperties filteredProperties = new FilteredProperties(new ArrayList<>());
         System.out.println(properties.get(0).getId() == properties.get(0).getId());
@@ -69,26 +53,13 @@ public class PropertyServiceImpl implements PropertyService {
         System.out.println(kieSession.fireAllRules());
         kieSession.dispose();
 
-        List<PropertyDTO> propertyDTOs = new ArrayList<>();
-        for(Property property : filteredProperties.getProperties()) {
-            PropertyDTO propertyDTO = new PropertyDTO();
-            propertyDTO.setId(property.getId());
-            propertyDTO.setBuildDate(property.getBuildDate());
-            propertyDTO.setCoordinates(property.getCoordinates());
-            propertyDTO.setAddress(property.getAddress());
-            propertyDTO.setOwner(property.getOwner());
-            propertyDTO.setSurface(property.getSurface());
-            propertyDTO.setPricePerSquareM(property.getPricePerSquareM());
-            propertyDTO.setNumberOfRooms(property.getNumberOfRooms());
-            propertyDTOs.add(propertyDTO);
-        }
-
-        return propertyDTOs;
+        return filteredProperties.getProperties();
     }
 
     @Override
-    public List<ScoredPropertyDTO> searchProperties(SearchDTO searchDTO) {
-        List<Property> properties = propertyRepository.getAll();
+    public List<ScoredProperty> scoreProperties(ScoreDTO searchDTO, List<Property> properties) {
+        if(properties == null)
+            properties = propertyRepository.getAll();
         List<ScoredProperty> scoredPropertyList = new ArrayList<>();
         for(Property property : properties) {
             scoredPropertyList.add(new ScoredProperty(property));
@@ -108,24 +79,7 @@ public class PropertyServiceImpl implements PropertyService {
         System.out.println(kieSession.fireAllRules());
         kieSession.dispose();
 
-        List<ScoredPropertyDTO> scoredPropertyDTOS = new ArrayList<>();
-        for(ScoredProperty scoredProperty : scoredProperties.getScoredProperties()) {
-            Property property = scoredProperty.getProperty();
-            PropertyDTO propertyDTO = new PropertyDTO();
-            propertyDTO.setId(property.getId());
-            propertyDTO.setBuildDate(property.getBuildDate());
-            propertyDTO.setCoordinates(property.getCoordinates());
-            propertyDTO.setAddress(property.getAddress());
-            propertyDTO.setOwner(property.getOwner());
-            propertyDTO.setSurface(property.getSurface());
-            propertyDTO.setPricePerSquareM(property.getPricePerSquareM());
-            propertyDTO.setNumberOfRooms(property.getNumberOfRooms());
-            scoredPropertyDTOS.add(new ScoredPropertyDTO(propertyDTO, scoredProperty.getScore()));
-        }
-
-        scoredProperties.getScoredProperties().forEach(
-                ps -> System.out.println(ps.getScore()));
-        return scoredPropertyDTOS;
+        return scoredProperties.getScoredProperties();
     }
 
 }

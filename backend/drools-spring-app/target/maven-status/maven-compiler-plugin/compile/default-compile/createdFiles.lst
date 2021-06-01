@@ -5,6 +5,7 @@ sbnz/integracija/example/controller/PropertyController.class
 sbnz/integracija/example/conf/WebSecurityConfig.class
 sbnz/integracija/example/repository/ObjectOfInterestRepository.class
 sbnz/integracija/example/repository/UserRepository.class
+sbnz/integracija/example/controller/PropertyController$1.class
 sbnz/integracija/example/service/implementation/UserServiceImpl.class
 sbnz/integracija/example/service/PropertyService.class
 sbnz/integracija/example/controller/dtos/ScoredPropertyDTO.class
@@ -15,6 +16,7 @@ sbnz/integracija/example/model/persistance/Coordinates.class
 sbnz/integracija/example/conf/WebConfig.class
 sbnz/integracija/example/model/enums/ObjectOfInterestType.class
 sbnz/integracija/example/repository/PropertyRepository.class
+sbnz/integracija/example/controller/dtos/ScoreDTO.class
 sbnz/integracija/example/controller/dtos/RegisterDTO.class
 sbnz/integracija/example/model/enums/Role.class
 sbnz/integracija/example/model/persistance/User.class
@@ -23,6 +25,7 @@ sbnz/integracija/example/model/search/Scaler.class
 sbnz/integracija/example/model/persistance/ObjectOfInterest.class
 sbnz/integracija/example/model/enums/Occupations.class
 sbnz/integracija/example/facts/Item$Category.class
+sbnz/integracija/example/controller/PropertyController$2.class
 sbnz/integracija/example/model/search/ScoredProperty.class
 sbnz/integracija/example/Application.class
 sbnz/integracija/example/controller/dtos/PropertyDTO.class

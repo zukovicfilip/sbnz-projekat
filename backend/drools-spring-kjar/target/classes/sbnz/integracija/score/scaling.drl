@@ -2,13 +2,13 @@ package sbnz.integracija;
 
 import sbnz.integracija.example.model.search.ScoredProperty
 import sbnz.integracija.example.model.search.Scaler
-import sbnz.integracija.example.controller.dtos.SearchDTO
+import sbnz.integracija.example.controller.dtos.ScoreDTO
 
 rule "Has car" salience 2
     agenda-group "scaling"
     when
         $sp: ScoredProperty(scaler.getFiredRules() not contains "Has car");
-        $s: SearchDTO(hasCar == true);
+        $s: ScoreDTO(hasCar == true);
     then
         $sp.getScaler().setDistanceScale(2);
         $sp.getScaler().getFiredRules().add("Has car");
@@ -19,7 +19,7 @@ rule "Has kids" salience 2
     agenda-group "scaling"
     when
         $sp: ScoredProperty(scaler.getFiredRules() not contains "Has kids");
-        $s: SearchDTO(kids == true);
+        $s: ScoreDTO(kids == true);
    then
         $sp.getScaler().setHospitalScale(
             $sp.getScaler().getHospitalScale() + 1
@@ -41,7 +41,7 @@ rule "Younger person" salience 2
     agenda-group "scaling"
     when
         $sp: ScoredProperty(scaler.getFiredRules() not contains "Younger person");
-        $s: SearchDTO(younger > 0);
+        $s: ScoreDTO(younger > 0);
     then
         $sp.getScaler().setUniversityScale(
             $sp.getScaler().getUniversityScale() + 1
@@ -60,7 +60,7 @@ rule "Middle aged person" salience 2
     agenda-group "scaling"
     when
         $sp: ScoredProperty(scaler.getFiredRules() not contains "Middle aged person");
-        $s: SearchDTO(middleAged > 0);
+        $s: ScoreDTO(middleAged > 0);
     then
         $sp.getScaler().setBankScale(
             $sp.getScaler().getBankScale() + 0.5
@@ -76,7 +76,7 @@ rule "Older person" salience 2
     agenda-group "scaling"
     when
         $sp: ScoredProperty(scaler.getFiredRules() not contains "Older person");
-        $s: SearchDTO(older > 0);
+        $s: ScoreDTO(older > 0);
     then
         $sp.getScaler().setHospitalScale(
             $sp.getScaler().getHospitalScale() + 2.5
