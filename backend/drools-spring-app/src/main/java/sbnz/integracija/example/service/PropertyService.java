@@ -1,5 +1,6 @@
 package sbnz.integracija.example.service;
 
+import sbnz.integracija.example.controller.dtos.FilterDTO;
 import sbnz.integracija.example.controller.dtos.PropertyDTO;
 import sbnz.integracija.example.controller.dtos.ScoredPropertyDTO;
 import sbnz.integracija.example.controller.dtos.SearchDTO;
@@ -12,5 +13,7 @@ public interface PropertyService {
     List<PropertyDTO> getAllProperties();
 
     List<ScoredPropertyDTO> searchProperties(SearchDTO searchDTO);
+
+    List<PropertyDTO> filterProperties(FilterDTO filterDTO);
 
 }

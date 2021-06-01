@@ -1,3 +1,4 @@
+sbnz/integracija/example/model/search/FilteredProperties.class
 sbnz/integracija/example/controller/dtos/SearchDTO.class
 sbnz/integracija/example/facts/Item.class
 sbnz/integracija/example/controller/PropertyController.class
@@ -25,5 +26,6 @@ sbnz/integracija/example/facts/Item$Category.class
 sbnz/integracija/example/model/search/ScoredProperty.class
 sbnz/integracija/example/Application.class
 sbnz/integracija/example/controller/dtos/PropertyDTO.class
+sbnz/integracija/example/controller/dtos/FilterDTO.class
 sbnz/integracija/example/model/search/ScoredProperties.class
 sbnz/integracija/example/model/persistance/Amenity.class

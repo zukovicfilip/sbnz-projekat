@@ -1,5 +1,7 @@
 /home/zukovicfilip/Desktop/Sistemi bazirani na znanju/sbnz-projekat/backend/drools-spring-app/src/main/java/sbnz/integracija/example/controller/dtos/ScoredPropertyDTO.java
 /home/zukovicfilip/Desktop/Sistemi bazirani na znanju/sbnz-projekat/backend/drools-spring-app/src/main/java/sbnz/integracija/example/model/search/Scaler.java
+/home/zukovicfilip/Desktop/Sistemi bazirani na znanju/sbnz-projekat/backend/drools-spring-app/src/main/java/sbnz/integracija/example/model/search/FilteredProperties.java
+/home/zukovicfilip/Desktop/Sistemi bazirani na znanju/sbnz-projekat/backend/drools-spring-app/src/main/java/sbnz/integracija/example/controller/dtos/FilterDTO.java
 /home/zukovicfilip/Desktop/Sistemi bazirani na znanju/sbnz-projekat/backend/drools-spring-app/src/main/java/sbnz/integracija/example/controller/dtos/SearchDTO.java
 /home/zukovicfilip/Desktop/Sistemi bazirani na znanju/sbnz-projekat/backend/drools-spring-app/src/main/java/sbnz/integracija/example/controller/dtos/PropertyDTO.java
 /home/zukovicfilip/Desktop/Sistemi bazirani na znanju/sbnz-projekat/backend/drools-spring-app/src/main/java/sbnz/integracija/example/model/persistance/User.java

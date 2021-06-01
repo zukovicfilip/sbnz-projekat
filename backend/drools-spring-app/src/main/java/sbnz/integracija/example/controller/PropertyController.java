@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import sbnz.integracija.example.controller.dtos.FilterDTO;
 import sbnz.integracija.example.controller.dtos.PropertyDTO;
 import sbnz.integracija.example.controller.dtos.ScoredPropertyDTO;
 import sbnz.integracija.example.controller.dtos.SearchDTO;
@@ -23,6 +24,13 @@ public class PropertyController {
     public ResponseEntity<List<PropertyDTO>> getAllProperties() {
         List<PropertyDTO> properties = propertyService.getAllProperties();
         return new ResponseEntity<>(properties, HttpStatus.OK);
+    }
+
+    @PostMapping("/filter")
+    public ResponseEntity<List<PropertyDTO>> filterProperties(@RequestBody FilterDTO filterDTO) {
+        List<PropertyDTO> filterProperty = propertyService.filterProperties(filterDTO);
+
+        return new ResponseEntity<>(filterProperty, HttpStatus.OK);
     }
 
     @PostMapping

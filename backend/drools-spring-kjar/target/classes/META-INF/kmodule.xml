@@ -2,4 +2,10 @@
 <kmodule xmlns="http://jboss.org/kie/6.0.0/kmodule"
 		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
+	<kbase name="Rulset1" packages="search">
+	</kbase>
+
+	<kbase name="Rulset2" packages="filter">
+	</kbase>
+
 </kmodule>

@@ -1,0 +1,70 @@
+package sbnz.integracija;
+
+import sbnz.integracija.example.controller.dtos.FilterDTO
+import sbnz.integracija.example.model.persistance.Property
+import sbnz.integracija.example.model.search.FilteredProperties
+
+import java.util.UUID;
+import java.lang.Integer;
+import java.util.List;
+import java.util.Set;
+import java.util.Collection
+import java.util.ArrayList;
+
+
+rule "Filter"
+    agenda-group "filter"
+    no-loop
+    when
+        f: FilterDTO(
+            $priceMin: priceMin,
+            $priceMax: priceMax,
+            $surfaceMin: surfaceMin,
+            $surfaceMax: surfaceMax,
+            $numberOfRoomsMin: numberOfRoomsMin,
+            $numberOfRoomsMax: numberOfRoomsMax
+        )
+        $p: Property(
+            $pid: id
+        )
+        $fp: FilteredProperties()
+        filterProperty($pid, $priceMin, $priceMax, $surfaceMin, $surfaceMax, $numberOfRoomsMin, $numberOfRoomsMax;)
+    then
+        System.out.println(String.format("Filtered property %s", $pid));
+        List<Property> list = new ArrayList<Property>($fp.getProperties());
+        list.add($p);
+
+        $fp.setProperties(list);
+        update($fp)
+
+end
+
+query filterProperty(UUID id, double priceMin, double priceMax, double surfaceMin, double surfaceMax, int numberOfRoomsMin, int numberOfRoomsMax)
+    filterPrice(id, priceMin, priceMax;) and
+    filterSurface(id, surfaceMin, surfaceMax;) and
+    filterNumberOfRooms(id, numberOfRoomsMin, numberOfRoomsMax;)
+end
+
+query filterPrice(UUID pid, double priceMin, double priceMax)
+    Property(
+        id == pid,
+        pricePerSquareM >= priceMin,
+        pricePerSquareM <= priceMax
+    )
+end
+
+query filterSurface(UUID pid, double surfaceMin, double surfaceMax)
+    Property(
+        id == pid,
+        surface >= surfaceMin,
+        surface <= surfaceMax
+    )
+end
+
+query filterNumberOfRooms(UUID pid, int numberOfRoomsMin, int numberOfRoomsMax)
+    Property(
+        id == pid,
+        numberOfRooms >= numberOfRoomsMin,
+        numberOfRooms <= numberOfRoomsMax
+    )
+end
