@@ -19,6 +19,19 @@ class PropertyService {
 
     return properties
   }
+
+  async searchProperties(data) {
+    const properties = await this.apiClient
+      .post('/search', data)
+      .then(response => {
+        return response
+      })
+      .catch(err => {
+        return err.response
+      })
+
+    return properties
+  }
 }
 
 const propertyService = new PropertyService()
