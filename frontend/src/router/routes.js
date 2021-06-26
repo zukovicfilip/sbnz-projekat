@@ -15,10 +15,24 @@ const routes = [
     ]
   },
   {
-    path: '/search',
-    component: () => import('layouts/MainLayout.vue'),
+    path: '/buyer',
+    component: () => import('layouts/BuyerLayout.vue'),
     children: [
-      { path: '', component: () => import('pages/Search.vue') }
+      { path: 'search', component: () => import('pages/Search.vue') }
+    ]
+  },
+  {
+    path: '/seller',
+    component: () => import('layouts/SellerLayout.vue'),
+    children: [
+      { path: 'home', component: () => import('pages/SellerHomePage.vue') }
+    ]
+  },
+  {
+    path: '/admin',
+    component: () => import('layouts/AdminLayout.vue'),
+    children: [
+      { path: 'home', component: () => import('pages/AdminHomePage.vue') }
     ]
   },
 

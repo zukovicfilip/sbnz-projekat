@@ -215,7 +215,13 @@ export default {
         this.setEmail(response.data.email)
         this.setRole(response.data.role)
         successfulLogin(response.data.email)
-        //this.$router.push({ path: '/chat' })
+        if (response.data.role == 'ADMIN') {
+          this.$router.push({ path: '/admin/home' })
+        } else if (response.data.role == 'SELLER') {
+          this.$router.push({ path: '/seller/home' })
+        } else if (response.data.role == 'BUYER') {
+          this.$router.push({ path: '/buyer/search' })
+        }
       } else {
         failedToLogin()
       }

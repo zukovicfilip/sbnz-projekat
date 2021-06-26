@@ -120,11 +120,13 @@ insert into object_of_interest(id, lat, lon, type)
 values ('59195aab-7bd8-4896-9f49-aeba29b88843', 45.25459982211558, 19.847032467435426, 'RESTAURANT');
 
 insert into registered_user(id, email, password, role)
-values ('3b00204e-1897-4b6e-a175-5d0595833ced', 'nikolapekovic@gmail.com', 'sifra123', 'ADMIN');
+values ('3b00204e-1897-4b6e-a175-5d0595833ced', 'nikolapekovic@gmail.com', 'sss', 'ADMIN');
 insert into registered_user(id, email, password, role)
-values ('71df3a81-dbe4-451a-b0e0-6849ea1339fb', 'petarpetrovic@gmail.com', 'sifra123', 'SELLER');
+values ('71df3a81-dbe4-451a-b0e0-6849ea1339fb', 'petarpetrovic@gmail.com', 'sss', 'SELLER');
 insert into registered_user(id, email, password, role)
-values ('fed07d31-6f28-4ff4-ab3b-65f87e011e4d', 'vojatankosic@gmail.com', 'sifra123', 'SELLER');
+values ('fed07d31-6f28-4ff4-ab3b-65f87e011e4d', 'vojatankosic@gmail.com', 'sss', 'SELLER');
+insert into registered_user(id, email, password, role)
+values ('be19669c-45ac-4011-99ee-8c7b05795eb3', 'markomiljanov@gmail.com', 'sss', 'BUYER');
 
 insert into property(id, build_date, lat, lon, address, number_of_rooms, price_per_squarem, surface, owner_id)
 values ('4d77ea76-fb81-46b5-b1dc-901a11982c41', '1990', 45.25138609387936, 19.798527325080208, 'Jovana Ducica 22', 3, 1400, 80, '71df3a81-dbe4-451a-b0e0-6849ea1339fb');
