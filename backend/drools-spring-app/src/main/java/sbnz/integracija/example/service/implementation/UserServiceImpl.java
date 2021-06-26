@@ -19,7 +19,7 @@ public class UserServiceImpl implements UserService {
         User user = new User();
         user.setEmail(registerDTO.getEmail());
         user.setPassword(registerDTO.getPassword());
-        user.setRole(Role.SELLER);
+        user.setRole(registerDTO.getRole());
         return userRepository.save(user);
     }
 }

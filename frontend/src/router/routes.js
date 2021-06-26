@@ -8,6 +8,13 @@ const routes = [
     ]
   },
   {
+    path: '/auth',
+    component: () => import('layouts/MainLayout.vue'),
+    children: [
+      { path: '', component: () => import('pages/Auth.vue') }
+    ]
+  },
+  {
     path: '/search',
     component: () => import('layouts/MainLayout.vue'),
     children: [
