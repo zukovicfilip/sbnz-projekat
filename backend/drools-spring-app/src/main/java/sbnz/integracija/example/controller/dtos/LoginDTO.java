@@ -1,19 +1,17 @@
 package sbnz.integracija.example.controller.dtos;
 
-import sbnz.integracija.example.model.enums.Role;
-
-public class RegisterDTO {
+public class LoginDTO {
 
     private String email;
 
     private String password;
 
-    public RegisterDTO(String email, String password) {
+    public LoginDTO(String email, String password) {
         this.email = email;
         this.password = password;
     }
 
-    public RegisterDTO() {
+    public LoginDTO() {
 
     }
 

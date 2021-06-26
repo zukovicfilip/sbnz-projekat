@@ -8,19 +8,27 @@ const store = new Vuex.Store({
   plugins: [createPersistedState({ storage: window.sessionStorage })],
   state: {
     jwt: "",
-    username: ""
+    id: "",
+    email: "",
+    role: ""
   },
   mutations: {
     'SET_JWT'(state, jwt) { state.jwt = jwt },
-    'SET_USERNAME'(state, username) { state.username = username }
+    'SET_ID'(state, id) { state.id = id },
+    'SET_EMAIL'(state, email) { state.email = email },
+    'SET_ROLE'(state, role) { state.role = role }
   },
   actions: {
     setJwt({ commit }, jwt) { commit("SET_JWT", jwt) },
-    setUsername({ commit }, username) { commit("SET_USERNAME", username) }
+    setId({ commit }, id) { commit("SET_ID", id) },
+    setEmail({ commit }, email) { commit("SET_EMAIL", email) },
+    setRole({ commit }, role) { commit("SET_ROLE", role) }
   },
   getters: {
     getJwt: (state) => state.jwt,
-    getUsername: (state) => state.username
+    getId: (state) => state.id,
+    getEmail: (state) => state.email,
+    getRole: (state) => state.role
   },
 })
 

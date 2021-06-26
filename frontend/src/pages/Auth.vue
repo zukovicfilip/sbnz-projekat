@@ -29,14 +29,14 @@
                     >
                       <q-input
                         filled
-                        label="Username *"
-                        hint="Input your username"
-                        v-model="usernameLogin"
+                        label="Email *"
+                        hint="Input your email"
+                        v-model="emailLogin"
                         lazy-rules
                         :rules="[
                           (val) =>
                             (val && val.length > 0) ||
-                            'Please input your username',
+                            'Please input your email',
                         ]"
                       >
                         <template v-slot:prepend>
@@ -96,13 +96,13 @@
                     >
                       <q-input
                         filled
-                        label="Username *"
-                        hint="Input your username"
-                        v-model="pUsername"
+                        label="Email *"
+                        hint="Input your email"
+                        v-model="pEmail"
                         lazy-rules
                         :rules="[
                           (val) =>
-                            (val && val.length > 0) || 'Please input your username',
+                            (val && val.length > 0) || 'Please input your email',
                         ]"
                       />
 
@@ -189,9 +189,9 @@ export default {
       isPass: false,
       isPass1: false,
       isPass2: false,
-      usernameLogin: '',
+      emailLogin: '',
       passLogin: '',
-      pUsername: '',
+      pEmail: '',
       pPass1: '',
       pPass2: ''
     }
@@ -199,26 +199,30 @@ export default {
   methods: {
     ...mapActions({
       setJwt: 'setJwt',
-      setUsername: 'setUsername'
+      setId: 'setId',
+      setEmail: 'setEmail',
+      setRole: 'setRole'
     }),
     async onSubmitLogin () {
       const loginData = {
-        username: this.usernameLogin,
+        email: this.emailLogin,
         password: this.passLogin
       }
       const response = await UserService.login(loginData)
       if (response.status == 200) {
-        this.setJwt(response.data.jwt)
-        this.setUsername(response.data.username)
-        successfulLogin(response.data.username)
-        this.$router.push({ path: '/chat' })
+        this.setJwt(response.data.token)
+        this.setId(response.data.id)
+        this.setEmail(response.data.email)
+        this.setRole(response.data.role)
+        successfulLogin(response.data.email)
+        //this.$router.push({ path: '/chat' })
       } else {
         failedToLogin()
       }
     },
     async onSubmit () {
       const registerData = {
-        username: this.pUsername,
+        email: this.pEmail,
         password: this.pPass1
       }
       const response = await UserService.registerNewUser(registerData)

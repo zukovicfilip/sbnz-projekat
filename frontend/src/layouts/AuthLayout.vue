@@ -10,8 +10,6 @@
           Real estate
         </q-toolbar-title>
 
-        <q-btn flat color="white" label="Login / Register" @click="goToAuth" />
-
       </q-toolbar>
     </q-header>
 
@@ -26,11 +24,6 @@
 export default {
   data () {
     return {
-    }
-  },
-  methods: {
-    goToAuth() {
-      this.$router.push({ path: '/auth' })
     }
   }
 }

@@ -4,7 +4,7 @@ import store from './../store/index'
 class UserService {
   constructor () {
     this.apiClient = axios.create({
-      baseURL: 'http://localhost:' + process.env.SERVER_PORT + '/ChatWAR/rest/chat/users'
+      baseURL: 'http://localhost:8080/api/auth'
     })
   }
 
@@ -34,36 +34,6 @@ class UserService {
   async login (user) {
     const success = this.apiClient
       .post('/login', user)
-      .then(response => {
-        return response
-      })
-      .catch(err => {
-        return err.response
-      })
-    return success
-  }
-
-  async logout() {
-    const headers = this.setupHeaders()
-    const success = this.apiClient
-      .delete('/loggedIn/' + store.getters.getUsername, {
-        headers
-      })
-      .then(response => {
-        return response
-      })
-      .catch(err => {
-        return err.response
-      })
-    return success
-  }
-
-  async getLoggedInUsers () {
-    const headers = this.setupHeaders()
-    const success = this.apiClient
-      .get('/loggedIn', {
-        headers
-      })
       .then(response => {
         return response
       })
