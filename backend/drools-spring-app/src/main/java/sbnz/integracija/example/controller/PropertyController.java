@@ -9,10 +9,7 @@ import sbnz.integracija.example.model.persistance.Property;
 import sbnz.integracija.example.model.search.ScoredProperty;
 import sbnz.integracija.example.service.PropertyService;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 @RestController
 @RequestMapping(value = "/api/property")
@@ -20,6 +17,27 @@ public class PropertyController {
 
     @Autowired
     private PropertyService propertyService;
+
+    @GetMapping("/seller/{id}")
+    public ResponseEntity<List<PropertyDTO>> getPropertiesBySeller(@PathVariable UUID id) {
+        List<Property> properties = propertyService.getPropertiesBySeller(id);
+
+        List<PropertyDTO> propertyDTOs = new ArrayList<>();
+        for(Property property : properties) {
+            PropertyDTO propertyDTO = new PropertyDTO();
+            propertyDTO.setId(property.getId());
+            propertyDTO.setBuildDate(property.getBuildDate());
+            propertyDTO.setCoordinates(property.getCoordinates());
+            propertyDTO.setAddress(property.getAddress());
+            propertyDTO.setOwner(property.getOwner());
+            propertyDTO.setSurface(property.getSurface());
+            propertyDTO.setPricePerSquareM(property.getPricePerSquareM());
+            propertyDTO.setNumberOfRooms(property.getNumberOfRooms());
+            propertyDTOs.add(propertyDTO);
+        }
+
+        return new ResponseEntity<>(propertyDTOs, HttpStatus.OK);
+    }
 
     @GetMapping
     public ResponseEntity<List<PropertyDTO>> getAllProperties() {

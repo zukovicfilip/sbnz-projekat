@@ -1,4 +1,5 @@
 import axios from 'axios'
+import store from './../store/index'
 
 class PropertyService {
   constructor () {
@@ -10,6 +11,19 @@ class PropertyService {
   async getAllProperties() {
     const properties = await this.apiClient
       .get('')
+      .then(response => {
+        return response
+      })
+      .catch(err => {
+        return err.response
+      })
+
+    return properties
+  }
+
+  async getMyProperties() {
+    const properties = await this.apiClient
+      .get('/seller/' + store.getters.getId)
       .then(response => {
         return response
       })

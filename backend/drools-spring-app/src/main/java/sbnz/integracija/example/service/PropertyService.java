@@ -6,10 +6,13 @@ import sbnz.integracija.example.model.persistance.Property;
 import sbnz.integracija.example.model.search.ScoredProperty;
 
 import java.util.List;
+import java.util.UUID;
 
 public interface PropertyService {
 
     List<Property> getAllProperties();
+
+    List<Property> getPropertiesBySeller(UUID id);
 
     List<ScoredProperty> scoreProperties(ScoreDTO scoreDTO, List<Property> properties);
 

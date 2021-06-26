@@ -50,5 +50,6 @@ export default {
   max-width: 400px;
   width: 20rem;
   display: table;
+  background-color: indianred;
 }
 </style>

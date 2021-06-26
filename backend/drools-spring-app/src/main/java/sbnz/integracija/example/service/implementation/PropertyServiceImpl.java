@@ -17,6 +17,7 @@ import sbnz.integracija.example.service.PropertyService;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class PropertyServiceImpl implements PropertyService {
@@ -37,6 +38,11 @@ public class PropertyServiceImpl implements PropertyService {
     @Override
     public List<Property> getAllProperties() {
         return propertyRepository.getAll();
+    }
+
+    @Override
+    public List<Property> getPropertiesBySeller(UUID id) {
+        return propertyRepository.getBySellerId(id);
     }
 
     public List<Property> filterProperties(FilterDTO filterDTO) {
