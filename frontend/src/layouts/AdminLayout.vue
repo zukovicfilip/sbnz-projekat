@@ -13,8 +13,8 @@
       </q-toolbar>
     </q-header>
 
-    <q-drawer show-if-above v-model="rightDrawerOpen" side="right" bordered>
-      <!-- drawer content -->
+    <q-drawer v-model="rightDrawerOpen" side="right" bordered >
+
     </q-drawer>
 
     <q-page-container>

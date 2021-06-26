@@ -4,7 +4,9 @@
       style="margin: 0 0 2rem 0"
       class="row-xs-12 row-sm-4 row-md-3 row-lg-3"
     >
-      <div class="text-h4">My properties</div>
+      <div class="text-h4">My properties
+        <q-btn round color="red" icon="add" />
+      </div>
     </div>
     <div class="row-xs-12 row-sm-4 row-md-3 row-lg-3">
       <div class="property-card">
