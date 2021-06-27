@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import sbnz.integracija.example.controller.dto_mappers.DTOMapper;
 import sbnz.integracija.example.controller.dtos.*;
 import sbnz.integracija.example.model.persistance.Property;
 import sbnz.integracija.example.model.search.ScoredProperty;
@@ -24,16 +25,7 @@ public class PropertyController {
 
         List<PropertyDTO> propertyDTOs = new ArrayList<>();
         for(Property property : properties) {
-            PropertyDTO propertyDTO = new PropertyDTO();
-            propertyDTO.setId(property.getId());
-            propertyDTO.setBuildDate(property.getBuildDate());
-            propertyDTO.setCoordinates(property.getCoordinates());
-            propertyDTO.setAddress(property.getAddress());
-            propertyDTO.setOwner(property.getOwner());
-            propertyDTO.setSurface(property.getSurface());
-            propertyDTO.setPricePerSquareM(property.getPricePerSquareM());
-            propertyDTO.setNumberOfRooms(property.getNumberOfRooms());
-            propertyDTOs.add(propertyDTO);
+            propertyDTOs.add(DTOMapper.getPropertyDTO(property));
         }
 
         return new ResponseEntity<>(propertyDTOs, HttpStatus.OK);
@@ -45,16 +37,7 @@ public class PropertyController {
 
         List<PropertyDTO> propertyDTOs = new ArrayList<>();
         for(Property property : properties) {
-            PropertyDTO propertyDTO = new PropertyDTO();
-            propertyDTO.setId(property.getId());
-            propertyDTO.setBuildDate(property.getBuildDate());
-            propertyDTO.setCoordinates(property.getCoordinates());
-            propertyDTO.setAddress(property.getAddress());
-            propertyDTO.setOwner(property.getOwner());
-            propertyDTO.setSurface(property.getSurface());
-            propertyDTO.setPricePerSquareM(property.getPricePerSquareM());
-            propertyDTO.setNumberOfRooms(property.getNumberOfRooms());
-            propertyDTOs.add(propertyDTO);
+            propertyDTOs.add(DTOMapper.getPropertyDTO(property));
         }
 
         return new ResponseEntity<>(propertyDTOs, HttpStatus.OK);
@@ -66,16 +49,7 @@ public class PropertyController {
 
         List<PropertyDTO> propertyDTOs = new ArrayList<>();
         for(Property property : filterProperty) {
-            PropertyDTO propertyDTO = new PropertyDTO();
-            propertyDTO.setId(property.getId());
-            propertyDTO.setBuildDate(property.getBuildDate());
-            propertyDTO.setCoordinates(property.getCoordinates());
-            propertyDTO.setAddress(property.getAddress());
-            propertyDTO.setOwner(property.getOwner());
-            propertyDTO.setSurface(property.getSurface());
-            propertyDTO.setPricePerSquareM(property.getPricePerSquareM());
-            propertyDTO.setNumberOfRooms(property.getNumberOfRooms());
-            propertyDTOs.add(propertyDTO);
+            propertyDTOs.add(DTOMapper.getPropertyDTO(property));
         }
 
         return new ResponseEntity<>(propertyDTOs, HttpStatus.OK);

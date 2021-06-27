@@ -5,6 +5,7 @@ import org.kie.api.runtime.KieSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import sbnz.integracija.example.controller.dtos.FilterDTO;
+import sbnz.integracija.example.controller.dtos.PropertyDTO;
 import sbnz.integracija.example.controller.dtos.ScoreDTO;
 import sbnz.integracija.example.model.persistance.ObjectOfInterest;
 import sbnz.integracija.example.model.persistance.Property;
@@ -43,6 +44,11 @@ public class PropertyServiceImpl implements PropertyService {
     @Override
     public List<Property> getPropertiesBySeller(UUID id) {
         return propertyRepository.getBySellerId(id);
+    }
+
+    @Override
+    public Property addProperty(Property property) {
+        return propertyRepository.save(property);
     }
 
     public List<Property> filterProperties(FilterDTO filterDTO) {

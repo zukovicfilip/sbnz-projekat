@@ -9,6 +9,8 @@ import sbnz.integracija.example.model.enums.Role;
 import sbnz.integracija.example.repository.UserRepository;
 import sbnz.integracija.example.service.UserService;
 
+import java.util.UUID;
+
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -22,6 +24,11 @@ public class UserServiceImpl implements UserService {
         user.setPassword(registerDTO.getPassword());
         user.setRole(Role.BUYER);
         return userRepository.save(user);
+    }
+
+    @Override
+    public User getUserById(UUID id) {
+        return userRepository.findById(id).get();
     }
 
     @Override
