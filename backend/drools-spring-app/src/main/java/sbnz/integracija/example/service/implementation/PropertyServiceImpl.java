@@ -47,6 +47,31 @@ public class PropertyServiceImpl implements PropertyService {
     }
 
     @Override
+    public Property recommendPrice(Property property) {
+        List<Property> properties = getAllProperties();
+
+        List<Property> similiarProperties = new ArrayList<>();
+
+        KieSession kieSession = kieContainer.getKieBase("Rulset3").newKieSession();
+
+        kieSession.getAgenda().getAgendaGroup("similiar_properties").setFocus();
+        kieSession.insert(similiarProperties);
+        kieSession.insert(property);
+        properties.forEach(kieSession::insert);
+        int firedRules = kieSession.fireAllRules();
+
+        kieSession.getAgenda().getAgendaGroup("average_price").setFocus();
+        kieSession.insert(similiarProperties);
+        firedRules += kieSession.fireAllRules();
+
+        kieSession.dispose();
+
+        if (firedRules != 0)
+            return null;
+        return property;
+    }
+
+    @Override
     public Property addProperty(Property property) {
         return propertyRepository.save(property);
     }

@@ -8,4 +8,7 @@
 	<kbase name="Rulset2" packages="filter">
 	</kbase>
 
+	<kbase name="Rulset3" packages="price_recommend">
+	</kbase>
+
 </kmodule>

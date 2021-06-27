@@ -43,6 +43,15 @@ public class PropertyController {
         return new ResponseEntity<>(propertyDTOs, HttpStatus.OK);
     }
 
+    @PostMapping("/recommend-price")
+    public ResponseEntity<PropertyDTO> recommendPrice(@RequestBody Property property) {
+        property = propertyService.recommendPrice(property);
+
+        if (property == null)
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(DTOMapper.getPropertyDTO(property), HttpStatus.OK);
+    }
+
     @PostMapping("/filter")
     public ResponseEntity<List<PropertyDTO>> filterProperties(@RequestBody FilterDTO filterDTO) {
         List<Property> filterProperty = propertyService.filterProperties(filterDTO);

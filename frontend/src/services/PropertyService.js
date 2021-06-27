@@ -34,6 +34,19 @@ class PropertyService {
     return properties
   }
 
+  async recommendPrice(property) {
+    const properties = await this.apiClient
+      .post('/recommend-price', property)
+      .then(response => {
+        return response
+      })
+      .catch(err => {
+        return err.response
+      })
+
+    return properties
+  }
+
   async searchProperties(data) {
     const properties = await this.apiClient
       .post('/search', data)

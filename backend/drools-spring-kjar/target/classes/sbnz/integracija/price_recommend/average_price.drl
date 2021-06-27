@@ -1,0 +1,23 @@
+package sbnz.integracija;
+
+import sbnz.integracija.example.model.persistance.Property
+import java.util.List;
+
+rule "Determine price"
+    agenda-group "average_price"
+    when
+        $filteredList: List()
+        eval($filteredList.size() > 0)
+        $average : Number() from accumulate(
+            Property($pricePerSquareM: pricePerSquareM) from $filteredList,
+            average($pricePerSquareM)
+        )
+        $original: Property(
+            id == null
+        )
+    then
+        System.out.println("AVERAGE: " + $average);
+        $original.setPricePerSquareM($average.doubleValue());
+        update($original);
+        drools.halt();
+end

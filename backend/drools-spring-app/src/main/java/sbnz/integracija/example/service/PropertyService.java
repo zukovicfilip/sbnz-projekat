@@ -15,6 +15,8 @@ public interface PropertyService {
 
     List<Property> getPropertiesBySeller(UUID id);
 
+    Property recommendPrice(Property property);
+
     Property addProperty(Property property);
 
     List<ScoredProperty> scoreProperties(ScoreDTO scoreDTO, List<Property> properties);

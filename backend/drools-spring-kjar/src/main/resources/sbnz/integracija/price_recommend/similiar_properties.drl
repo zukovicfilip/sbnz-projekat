@@ -1,0 +1,49 @@
+package sbnz.integracija.price_recommend;
+dialect  "mvel"
+
+import sbnz.integracija.example.model.persistance.Property
+
+import java.util.UUID;
+import java.lang.Integer;
+import java.util.List;
+import java.util.Set;
+
+rule "Similar properties"
+    agenda-group "similiar_properties"
+    when
+        $filteredList: List()
+        $original: Property(
+            id == null,
+            $surface: surface,
+            $numberOfRooms: numberOfRooms,
+            $buildDate: buildDate
+        )
+        $p: Property(
+            $id: id
+        )
+        eval($id != null)
+        filterProperty($id, $surface, $numberOfRooms, $buildDate;)
+    then
+        System.out.println(String.format("Filtered out property: %s", $p));
+        $filteredList.add($p);
+end
+
+query filterProperty(UUID id, double surface, int numberOfRooms, int buildDate)
+    matchesSurface(id, surface;) and
+    matchesNumOfRooms(id, numberOfRooms;) and
+    matchesBuildDate(id, buildDate;)
+end
+
+query matchesSurface(UUID _id, double _surface)
+    Property(
+        id == _id,
+        _surface >= surface - 10, _surface <= surface + 10)
+end
+
+query matchesNumOfRooms(UUID _id, int _numberOfRooms)
+    Property(id == _id, numberOfRooms == _numberOfRooms)
+end
+
+query matchesBuildDate(UUID _id, int _buildDate)
+    Property(id == _id, buildDate == _buildDate)
+end
