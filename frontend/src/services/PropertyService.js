@@ -21,6 +21,19 @@ class PropertyService {
     return properties
   }
 
+  async getPropertyById(id) {
+    const properties = await this.apiClient
+      .get('/' + id)
+      .then(response => {
+        return response
+      })
+      .catch(err => {
+        return err.response
+      })
+
+    return properties
+  }
+
   async getMyProperties() {
     const properties = await this.apiClient
       .get('/seller/' + store.getters.getId)

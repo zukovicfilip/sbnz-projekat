@@ -162,6 +162,7 @@ export default {
   data() {
     return {
       step: 1,
+      moreInfo: false,
       search: {
         filterDTO: {
           kids: false,

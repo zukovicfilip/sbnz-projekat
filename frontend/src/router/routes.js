@@ -18,7 +18,8 @@ const routes = [
     path: '/buyer',
     component: () => import('layouts/BuyerLayout.vue'),
     children: [
-      { path: 'search', component: () => import('pages/Search.vue') }
+      { path: 'search', component: () => import('pages/Search.vue') },
+      { path: 'search/property/:id', component: () => import('pages/Property.vue') }
     ]
   },
   {
