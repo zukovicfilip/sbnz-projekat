@@ -42,6 +42,11 @@ public class PropertyServiceImpl implements PropertyService {
     }
 
     @Override
+    public Property getPropertyById(UUID id) {
+        return propertyRepository.getById(id);
+    }
+
+    @Override
     public List<Property> getPropertiesBySeller(UUID id) {
         return propertyRepository.getBySellerId(id);
     }

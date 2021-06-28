@@ -19,18 +19,6 @@ public class PropertyController {
     @Autowired
     private PropertyService propertyService;
 
-    @GetMapping("/seller/{id}")
-    public ResponseEntity<List<PropertyDTO>> getPropertiesBySeller(@PathVariable UUID id) {
-        List<Property> properties = propertyService.getPropertiesBySeller(id);
-
-        List<PropertyDTO> propertyDTOs = new ArrayList<>();
-        for(Property property : properties) {
-            propertyDTOs.add(DTOMapper.getPropertyDTO(property));
-        }
-
-        return new ResponseEntity<>(propertyDTOs, HttpStatus.OK);
-    }
-
     @GetMapping
     public ResponseEntity<List<PropertyDTO>> getAllProperties() {
         List<Property> properties = propertyService.getAllProperties();
@@ -41,6 +29,13 @@ public class PropertyController {
         }
 
         return new ResponseEntity<>(propertyDTOs, HttpStatus.OK);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<PropertyDTO> getPropertyById(@PathVariable UUID id) {
+        Property property = propertyService.getPropertyById(id);
+
+        return new ResponseEntity<>(DTOMapper.getPropertyDTO(property), HttpStatus.OK);
     }
 
     @PostMapping("/recommend-price")

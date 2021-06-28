@@ -13,6 +13,8 @@ public interface PropertyService {
 
     List<Property> getAllProperties();
 
+    Property getPropertyById(UUID id);
+
     List<Property> getPropertiesBySeller(UUID id);
 
     Property recommendPrice(Property property);
