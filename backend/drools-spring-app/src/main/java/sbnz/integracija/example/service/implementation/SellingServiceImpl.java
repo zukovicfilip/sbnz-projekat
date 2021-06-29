@@ -47,4 +47,17 @@ public class SellingServiceImpl implements SellingService {
         return true;
     }
 
+    @Override
+    public boolean cancelReservation(UUID bId, UUID pId) {
+        Property property = propertyRepository.getById(pId);
+        User user = userRepository.findById(bId).get();
+        if(property == null || user == null)
+            return false;
+
+        propertyRepository.changePropertyStatus(pId, PropertyStatus.FOR_SALE);
+        propertyReservationRepository.cancleReservation(bId, pId, ReservationStatus.CANCELED);
+
+        return true;
+    }
+
 }

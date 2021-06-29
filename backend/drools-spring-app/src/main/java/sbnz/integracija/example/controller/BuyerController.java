@@ -25,5 +25,13 @@ public class BuyerController {
         }
     }
 
-    
+    @DeleteMapping("/{bId}/reserve/{pId}")
+    public ResponseEntity cancelReservation(@PathVariable UUID bId, @PathVariable UUID pId) {
+        if(sellingService.cancelReservation(bId, pId)) {
+            return new ResponseEntity(HttpStatus.OK);
+        } else {
+            return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
 }
