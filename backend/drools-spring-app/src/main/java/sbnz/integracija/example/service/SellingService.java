@@ -8,4 +8,8 @@ public interface SellingService {
 
     public boolean cancelReservation(UUID bId, UUID pId);
 
+    public boolean resolveReservation(UUID bId, UUID pId);
+
+    public boolean refuseReservation(UUID bId, UUID pId);
+
 }

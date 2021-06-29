@@ -17,7 +17,7 @@ public class BuyerController {
     private SellingService sellingService;
 
     @PostMapping("/{bId}/reserve/{pId}")
-    public ResponseEntity reserverProprety(@PathVariable UUID bId, @PathVariable UUID pId) {
+    public ResponseEntity reserveProperty(@PathVariable UUID bId, @PathVariable UUID pId) {
         if(sellingService.reserveProperty(bId, pId)) {
             return new ResponseEntity(HttpStatus.OK);
         } else {
@@ -25,9 +25,27 @@ public class BuyerController {
         }
     }
 
-    @DeleteMapping("/{bId}/reserve/{pId}")
+    @PostMapping("/{bId}/reserve/{pId}/cancel")
     public ResponseEntity cancelReservation(@PathVariable UUID bId, @PathVariable UUID pId) {
         if(sellingService.cancelReservation(bId, pId)) {
+            return new ResponseEntity(HttpStatus.OK);
+        } else {
+            return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PostMapping("/{bId}/reserve/{pId}/resolve")
+    public ResponseEntity resolveReservation(@PathVariable UUID bId, @PathVariable UUID pId) {
+        if(sellingService.resolveReservation(bId, pId)) {
+            return new ResponseEntity(HttpStatus.OK);
+        } else {
+            return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PostMapping("/{bId}/reserve/{pId}/refuse")
+    public ResponseEntity refuseReservation(@PathVariable UUID bId, @PathVariable UUID pId) {
+        if(sellingService.refuseReservation(bId, pId)) {
             return new ResponseEntity(HttpStatus.OK);
         } else {
             return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
