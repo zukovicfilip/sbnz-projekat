@@ -9,6 +9,7 @@
         <div class="text-left">Price per square meter: {{ property.pricePerSquareM }}</div>
         <div class="text-left">Surface: {{ property.surface }} m2</div>
         <div class="text-left">Number of rooms: {{ property.numberOfRooms }} m2</div>
+        <q-btn class="q-ma-sm" outline color="white" label="More info" @click="propertyInfo" />
       </q-card-section>
     </q-card>
   </div>
@@ -39,6 +40,9 @@ export default {
   methods: {
     dateFormat(date) {
       return moment(date).format("LL");
+    },
+    propertyInfo() {
+      this.$router.push("seller/property/" + this.property.id);
     }
   }
 };

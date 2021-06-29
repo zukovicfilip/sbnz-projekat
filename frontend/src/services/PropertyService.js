@@ -34,6 +34,32 @@ class PropertyService {
     return properties
   }
 
+  async newDetailsEvent(data) {
+    const properties = await this.apiClient
+      .post('/details-event', data)
+      .then(response => {
+        return response
+      })
+      .catch(err => {
+        return err.response
+      })
+
+    return properties
+  }
+
+  async getAdvice(id) {
+    const properties = await this.apiClient
+      .get('/' + id + '/advice')
+      .then(response => {
+        return response
+      })
+      .catch(err => {
+        return err.response
+      })
+
+    return properties
+  }
+
   async getMyProperties() {
     const properties = await this.apiClient
       .get('/seller/' + store.getters.getId)

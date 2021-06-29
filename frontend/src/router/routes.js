@@ -26,7 +26,8 @@ const routes = [
     path: '/seller',
     component: () => import('layouts/SellerLayout.vue'),
     children: [
-      { path: 'home', component: () => import('pages/SellerHomePage.vue') }
+      { path: 'home', component: () => import('pages/SellerHomePage.vue') },
+      { path: 'seller/property/:id', component: () => import('pages/SellerProperty.vue') }
     ]
   },
   {

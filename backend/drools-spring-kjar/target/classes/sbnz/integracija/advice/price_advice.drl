@@ -5,7 +5,7 @@ import sbnz.integracija.example.model.persistance.Property
 import sbnz.integracija.example.model.events.DetailsEvent
 import sbnz.integracija.example.controller.dtos.AdviceDTO
 
-rule "Lower property price if there is no interest in it"
+rule "Lower by 20%"
     agenda-group "advice"
     no-loop
     when
@@ -17,7 +17,7 @@ rule "Lower property price if there is no interest in it"
         update($p);
 end
 
-rule "Lower property price if there is low interest in it"
+rule "Lower by 10%"
     agenda-group "advice"
     lock-on-active
     when
@@ -34,7 +34,7 @@ rule "Lower property price if there is low interest in it"
         update($p);
 end
 
-rule "Keep property price if there is decent interest in it"
+rule "Keep same price"
     agenda-group "advice"
     lock-on-active
     when
@@ -51,7 +51,7 @@ rule "Keep property price if there is decent interest in it"
         update($p);
 end
 
-rule "Increase property price if there is high interest in it"
+rule "Increase price"
     agenda-group "advice"
     lock-on-active
     when

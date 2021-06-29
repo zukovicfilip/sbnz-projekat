@@ -20,6 +20,12 @@
         <div class="text-left">Email: {{ property.owner.email }}</div>
       </q-card-section>
     </q-card>
+    <q-card class="q-ma-md my-card">
+      <q-card-section>
+        <div class="text-h6">Advice</div>
+        <div class="text-left">{{ advice.priceAdvice }}</div>
+      </q-card-section>
+    </q-card>
   </div>
 </template>
 
@@ -32,20 +38,19 @@ export default {
       this.property = response.data;
     } else {
     }
-    const detailsEvent = {
-      propertyId: this.$route.params.id,
-      userId: this.$store.state.id
+    response = await PropertyService.getAdvice(this.$route.params.id);
+    if (response.status === 200) {
+      this.advice = response.data;
+    } else {
     }
-    console.log(detailsEvent)
-    await PropertyService.newDetailsEvent(detailsEvent)
   },
   data() {
     return {
-      property: {}
+      property: {},
+      advice: {}
     };
   },
-  methods: {
-  }
+  methods: {}
 };
 </script>
 
