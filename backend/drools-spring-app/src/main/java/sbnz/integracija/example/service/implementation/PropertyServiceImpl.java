@@ -67,6 +67,11 @@ public class PropertyServiceImpl implements PropertyService {
     }
 
     @Override
+    public void reserveProperty(UUID bId, UUID pId) {
+
+    }
+
+    @Override
     public Property getPropertyById(UUID id) {
         return propertyRepository.getById(id);
     }

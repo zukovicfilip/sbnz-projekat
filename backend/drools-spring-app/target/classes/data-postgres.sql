@@ -128,15 +128,15 @@ values ('fed07d31-6f28-4ff4-ab3b-65f87e011e4d', 'vojatankosic@gmail.com', 'sss',
 insert into registered_user(id, email, password, role)
 values ('be19669c-45ac-4011-99ee-8c7b05795eb3', 'markomiljanov@gmail.com', 'sss', 'BUYER');
 
-insert into property(id, build_date, lat, lon, address, number_of_rooms, price_per_squarem, surface, owner_id)
-values ('4d77ea76-fb81-46b5-b1dc-901a11982c41', '1990', 45.25138609387936, 19.798527325080208, 'Jovana Ducica 22', 3, 1400, 80, '71df3a81-dbe4-451a-b0e0-6849ea1339fb');
-insert into property(id, build_date, lat, lon, address, number_of_rooms, price_per_squarem, surface, owner_id)
-values ('32aae70c-f1bd-4da9-9adb-210ced4b361e', '2001', 45.246072300599444, 19.83069236925736, 'Doza Djerdja 39', 2, 1600, 42.3, 'fed07d31-6f28-4ff4-ab3b-65f87e011e4d');
-insert into property(id, build_date, lat, lon, address, number_of_rooms, price_per_squarem, surface, owner_id)
-values ('2cbedde0-e8c3-4195-a552-8171781cafb8', '1997', 45.26365431988266, 19.81951019624507, 'Bulevar Jase Tomica 20', 1, 1300, 34.3, 'fed07d31-6f28-4ff4-ab3b-65f87e011e4d');
-insert into property(id, build_date, lat, lon, address, number_of_rooms, price_per_squarem, surface, owner_id)
-values ('b5660520-eab4-45d1-a2f3-82d5383b8c8f', '2012', 45.22501333732415, 19.84931261158585, 'Gajeva 3, Sr. Kamenica', 5, 1100, 120, 'fed07d31-6f28-4ff4-ab3b-65f87e011e4d');
-insert into property(id, build_date, lat, lon, address, number_of_rooms, price_per_squarem, surface, owner_id)
-values ('dfef13ed-92cc-467c-82ed-0094c81051dd', '1950', 45.25683827539715, 19.845354557131408, 'Laze Teleckog 3', 2, 2100, 60, 'fed07d31-6f28-4ff4-ab3b-65f87e011e4d');
-insert into property(id, build_date, lat, lon, address, number_of_rooms, price_per_squarem, surface, owner_id)
-values ('aeb38758-380d-46c6-b4c7-b6f9c4b6c488', '2020', 45.2482962744917, 19.766547684599317, 'Jovana Kambera 3, Veternik', 7, 1200, 190, 'fed07d31-6f28-4ff4-ab3b-65f87e011e4d');
+insert into property(id, build_date, lat, lon, address, number_of_rooms, price_per_squarem, surface, owner_id, property_status)
+values ('4d77ea76-fb81-46b5-b1dc-901a11982c41', '1990', 45.25138609387936, 19.798527325080208, 'Jovana Ducica 22', 3, 1400, 80, '71df3a81-dbe4-451a-b0e0-6849ea1339fb', 'FOR_SALE');
+insert into property(id, build_date, lat, lon, address, number_of_rooms, price_per_squarem, surface, owner_id, property_status)
+values ('32aae70c-f1bd-4da9-9adb-210ced4b361e', '2001', 45.246072300599444, 19.83069236925736, 'Doza Djerdja 39', 2, 1600, 42.3, 'fed07d31-6f28-4ff4-ab3b-65f87e011e4d', 'FOR_SALE');
+insert into property(id, build_date, lat, lon, address, number_of_rooms, price_per_squarem, surface, owner_id, property_status)
+values ('2cbedde0-e8c3-4195-a552-8171781cafb8', '1997', 45.26365431988266, 19.81951019624507, 'Bulevar Jase Tomica 20', 1, 1300, 34.3, 'fed07d31-6f28-4ff4-ab3b-65f87e011e4d', 'FOR_SALE');
+insert into property(id, build_date, lat, lon, address, number_of_rooms, price_per_squarem, surface, owner_id, property_status)
+values ('b5660520-eab4-45d1-a2f3-82d5383b8c8f', '2012', 45.22501333732415, 19.84931261158585, 'Gajeva 3, Sr. Kamenica', 5, 1100, 120, 'fed07d31-6f28-4ff4-ab3b-65f87e011e4d', 'FOR_SALE');
+insert into property(id, build_date, lat, lon, address, number_of_rooms, price_per_squarem, surface, owner_id, property_status)
+values ('dfef13ed-92cc-467c-82ed-0094c81051dd', '1950', 45.25683827539715, 19.845354557131408, 'Laze Teleckog 3', 2, 2100, 60, 'fed07d31-6f28-4ff4-ab3b-65f87e011e4d', 'FOR_SALE');
+insert into property(id, build_date, lat, lon, address, number_of_rooms, price_per_squarem, surface, owner_id, property_status)
+values ('aeb38758-380d-46c6-b4c7-b6f9c4b6c488', '2020', 45.2482962744917, 19.766547684599317, 'Jovana Kambera 3, Veternik', 7, 1200, 190, 'fed07d31-6f28-4ff4-ab3b-65f87e011e4d', 'FOR_SALE');

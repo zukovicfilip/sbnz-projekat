@@ -81,16 +81,7 @@ public class PropertyController {
 
         List<ScoredPropertyDTO> scoredPropertyDTOS = new ArrayList<>();
         for(ScoredProperty scoredProperty : scoredProperties) {
-            Property property = scoredProperty.getProperty();
-            PropertyDTO propertyDTO = new PropertyDTO();
-            propertyDTO.setId(property.getId());
-            propertyDTO.setBuildDate(property.getBuildDate());
-            propertyDTO.setCoordinates(property.getCoordinates());
-            propertyDTO.setAddress(property.getAddress());
-            propertyDTO.setOwner(property.getOwner());
-            propertyDTO.setSurface(property.getSurface());
-            propertyDTO.setPricePerSquareM(property.getPricePerSquareM());
-            propertyDTO.setNumberOfRooms(property.getNumberOfRooms());
+            PropertyDTO propertyDTO = DTOMapper.getPropertyDTO(scoredProperty.getProperty());
             scoredPropertyDTOS.add(new ScoredPropertyDTO(propertyDTO, scoredProperty.getScore()));
         }
 
@@ -116,16 +107,7 @@ public class PropertyController {
 
         List<ScoredPropertyDTO> scoredPropertyDTOS = new ArrayList<>();
         for(ScoredProperty scoredProperty : scoredProperties) {
-            Property property = scoredProperty.getProperty();
-            PropertyDTO propertyDTO = new PropertyDTO();
-            propertyDTO.setId(property.getId());
-            propertyDTO.setBuildDate(property.getBuildDate());
-            propertyDTO.setCoordinates(property.getCoordinates());
-            propertyDTO.setAddress(property.getAddress());
-            propertyDTO.setOwner(property.getOwner());
-            propertyDTO.setSurface(property.getSurface());
-            propertyDTO.setPricePerSquareM(property.getPricePerSquareM());
-            propertyDTO.setNumberOfRooms(property.getNumberOfRooms());
+            PropertyDTO propertyDTO = DTOMapper.getPropertyDTO(scoredProperty.getProperty());
             scoredPropertyDTOS.add(new ScoredPropertyDTO(propertyDTO, scoredProperty.getScore()));
         }
 

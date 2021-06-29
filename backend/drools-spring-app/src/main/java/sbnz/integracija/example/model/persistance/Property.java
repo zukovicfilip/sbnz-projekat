@@ -1,6 +1,7 @@
 package sbnz.integracija.example.model.persistance;
 
 import org.hibernate.annotations.GenericGenerator;
+import sbnz.integracija.example.model.enums.PropertyStatus;
 
 import javax.persistence.*;
 import java.util.List;
@@ -29,6 +30,9 @@ public class Property {
 
     private int buildDate;
 
+    @Enumerated(EnumType.STRING)
+    private PropertyStatus propertyStatus;
+
     @ManyToOne
     private User owner;
 
@@ -36,6 +40,14 @@ public class Property {
     private List<Amenity> amenities;
 
     public Property() {
+    }
+
+    public PropertyStatus getPropertyStatus() {
+        return propertyStatus;
+    }
+
+    public void setPropertyStatus(PropertyStatus propertyStatus) {
+        this.propertyStatus = propertyStatus;
     }
 
     public UUID getId() {

@@ -1,6 +1,8 @@
 <template>
   <div class="q-pa-md justify-center">
-    <div class="text-h4">{{ property.address }}</div>
+    <div class="text-h4">{{ property.address }}
+      <q-btn class="q-ma-sm" outline color="primary" label="Buy this property" />
+    </div>
     <q-card class="q-ma-md my-card">
       <q-card-section>
         <div class="text-h6">Info</div>

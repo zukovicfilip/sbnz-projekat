@@ -1,5 +1,6 @@
 package sbnz.integracija.example.controller.dtos;
 
+import sbnz.integracija.example.model.enums.PropertyStatus;
 import sbnz.integracija.example.model.persistance.Coordinates;
 import sbnz.integracija.example.model.persistance.User;
 
@@ -13,20 +14,18 @@ public class PropertyDTO {
     private double pricePerSquareM;
     private int numberOfRooms;
     private int buildDate;
+    private PropertyStatus propertyStatus;
     private User owner;
 
-    public PropertyDTO(UUID id, double surface, Coordinates coordinates, String address, double pricePerSquareM, int numberOfRooms, int buildDate, User owner) {
-        this.id = id;
-        this.surface = surface;
-        this.coordinates = coordinates;
-        this.address = address;
-        this.pricePerSquareM = pricePerSquareM;
-        this.numberOfRooms = numberOfRooms;
-        this.buildDate = buildDate;
-        this.owner = owner;
+    public PropertyDTO() {
     }
 
-    public PropertyDTO() {
+    public PropertyStatus getPropertyStatus() {
+        return propertyStatus;
+    }
+
+    public void setPropertyStatus(PropertyStatus propertyStatus) {
+        this.propertyStatus = propertyStatus;
     }
 
     public UUID getId() {

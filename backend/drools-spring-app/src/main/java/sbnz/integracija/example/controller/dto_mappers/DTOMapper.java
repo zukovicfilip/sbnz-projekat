@@ -15,6 +15,7 @@ public class DTOMapper {
         propertyDTO.setSurface(property.getSurface());
         propertyDTO.setPricePerSquareM(property.getPricePerSquareM());
         propertyDTO.setNumberOfRooms(property.getNumberOfRooms());
+        propertyDTO.setPropertyStatus(property.getPropertyStatus());
         return propertyDTO;
     }
 

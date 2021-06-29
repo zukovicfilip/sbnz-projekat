@@ -19,6 +19,8 @@ public interface PropertyService {
 
     AdviceDTO getAdvice(UUID id);
 
+    void reserveProperty(UUID bId, UUID pId);
+
     Property getPropertyById(UUID id);
 
     List<Property> getPropertiesBySeller(UUID id);
