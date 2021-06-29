@@ -4,9 +4,11 @@ import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import sbnz.integracija.example.controller.dtos.AdviceDTO;
 import sbnz.integracija.example.controller.dtos.FilterDTO;
 import sbnz.integracija.example.controller.dtos.PropertyDTO;
 import sbnz.integracija.example.controller.dtos.ScoreDTO;
+import sbnz.integracija.example.model.events.DetailsEvent;
 import sbnz.integracija.example.model.persistance.ObjectOfInterest;
 import sbnz.integracija.example.model.persistance.Property;
 import sbnz.integracija.example.model.search.FilteredProperties;
@@ -17,6 +19,7 @@ import sbnz.integracija.example.repository.PropertyRepository;
 import sbnz.integracija.example.service.PropertyService;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -24,6 +27,8 @@ import java.util.UUID;
 public class PropertyServiceImpl implements PropertyService {
 
     private final KieContainer kieContainer;
+
+    private KieSession adviceSession;
 
     @Autowired
     private PropertyRepository propertyRepository;
@@ -34,11 +39,31 @@ public class PropertyServiceImpl implements PropertyService {
     @Autowired
     public PropertyServiceImpl(KieContainer kieContainer) {
         this.kieContainer = kieContainer;
+        this.adviceSession = kieContainer.getKieBase("Rulset4").newKieSession();
     }
 
     @Override
     public List<Property> getAllProperties() {
         return propertyRepository.getAll();
+    }
+
+    @Override
+    public void newDetailsEvent(DetailsEvent detailsEvent) {
+        detailsEvent.setExecutionTime(new Date());
+        adviceSession.insert(detailsEvent);
+    }
+
+    @Override
+    public AdviceDTO getAdvice(UUID id) {
+        Property property = getPropertyById(id);
+        AdviceDTO adviceDTO = new AdviceDTO();
+
+        adviceSession.getAgenda().getAgendaGroup("advice").setFocus();
+        adviceSession.insert(property);
+        adviceSession.insert(adviceDTO);
+        adviceSession.fireAllRules();
+
+        return adviceDTO;
     }
 
     @Override

@@ -1,11 +1,13 @@
 package sbnz.integracija.example.controller;
 
+import net.bytebuddy.asm.Advice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import sbnz.integracija.example.controller.dto_mappers.DTOMapper;
 import sbnz.integracija.example.controller.dtos.*;
+import sbnz.integracija.example.model.events.DetailsEvent;
 import sbnz.integracija.example.model.persistance.Property;
 import sbnz.integracija.example.model.search.ScoredProperty;
 import sbnz.integracija.example.service.PropertyService;
@@ -29,6 +31,20 @@ public class PropertyController {
         }
 
         return new ResponseEntity<>(propertyDTOs, HttpStatus.OK);
+    }
+
+    @PostMapping("/details-event")
+    public ResponseEntity newDetailsEvent(@RequestBody DetailsEvent detailsEvent) {
+        propertyService.newDetailsEvent(detailsEvent);
+        return new ResponseEntity(HttpStatus.OK);
+    }
+
+    @GetMapping("/{id}/advice")
+    public ResponseEntity<AdviceDTO> getAdvice(@PathVariable UUID id) {
+
+        AdviceDTO adviceDTO = propertyService.getAdvice(id);
+
+        return new ResponseEntity<>(adviceDTO, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")

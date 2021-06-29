@@ -11,4 +11,7 @@
 	<kbase name="Rulset3" packages="price_recommend">
 	</kbase>
 
+	<kbase name="Rulset4" packages="advice" equalsBehavior="equality" eventProcessingMode="stream">
+	</kbase>
+
 </kmodule>

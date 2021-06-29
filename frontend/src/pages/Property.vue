@@ -3,6 +3,7 @@
     <div class="text-h4">{{ property.address }}</div>
     <q-card class="q-ma-md my-card">
       <q-card-section>
+          <div class="text-h6">Info</div>
         <div class="text-left">Build year: {{ property.buildDate }}</div>
         <div class="text-left">
           Price per square meter: {{ property.pricePerSquareM }}

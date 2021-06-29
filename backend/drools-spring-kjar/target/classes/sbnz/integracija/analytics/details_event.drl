@@ -1,0 +1,69 @@
+package sbnz.integracija;
+dialect  "mvel"
+
+import sbnz.integracija.example.model.persistance.Property
+import sbnz.integracija.example.model.events.DetailsEvent
+import sbnz.integracija.example.controller.dtos.AdviceDTO
+
+rule "Lower property price if there is no interest in it"
+    agenda-group "advice"
+    no-loop
+    when
+        $p: Property($id: id)
+        $a: AdviceDTO($priceAdvice: priceAdvice)
+        not (DetailsEvent(propertyId == $id) over window:time(30d))
+    then
+        $a.setPriceAdvice("Lower price by 20 percent");
+        update($p);
+end
+
+rule "Lower property price if there is low interest in it"
+    agenda-group "advice"
+    lock-on-active
+    when
+        $p: Property($id: id)
+        $a: AdviceDTO($priceAdvice: priceAdvice)
+        Number(intValue > 0 && intValue < 10) from accumulate(
+            $ev: DetailsEvent(
+                propertyId == $id
+            ) over window:time(30d),
+            count($ev)
+        )
+    then
+        $a.setPriceAdvice("Lower price by 10 percent");
+        update($p);
+end
+
+rule "Keep property price if there is decent interest in it"
+    agenda-group "advice"
+    lock-on-active
+    when
+        $p: Property($id: id)
+        $a: AdviceDTO($priceAdvice: priceAdvice)
+        Number(intValue >= 10 && intValue <= 20) from accumulate(
+            $ev: DetailsEvent(
+                propertyId == $id
+            ) over window:time(30d),
+            count($ev)
+        )
+    then
+        $a.setPriceAdvice("Keep current price");
+        update($p);
+end
+
+rule "Increase property price if there is high interest in it"
+    agenda-group "advice"
+    lock-on-active
+    when
+        $p: Property($id: id)
+        $a: AdviceDTO($priceAdvice: priceAdvice)
+        Number(intValue > 20) from accumulate(
+            $ev: DetailsEvent(
+                propertyId == $id
+            ) over window:time(30d),
+            count($ev)
+        )
+    then
+        $a.setPriceAdvice("You can increase price");
+        update($p);
+end

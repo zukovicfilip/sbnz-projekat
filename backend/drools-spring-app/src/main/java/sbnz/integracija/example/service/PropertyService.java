@@ -1,8 +1,10 @@
 package sbnz.integracija.example.service;
 
+import sbnz.integracija.example.controller.dtos.AdviceDTO;
 import sbnz.integracija.example.controller.dtos.FilterDTO;
 import sbnz.integracija.example.controller.dtos.PropertyDTO;
 import sbnz.integracija.example.controller.dtos.ScoreDTO;
+import sbnz.integracija.example.model.events.DetailsEvent;
 import sbnz.integracija.example.model.persistance.Property;
 import sbnz.integracija.example.model.search.ScoredProperty;
 
@@ -12,6 +14,10 @@ import java.util.UUID;
 public interface PropertyService {
 
     List<Property> getAllProperties();
+
+    void newDetailsEvent(DetailsEvent detailsEvent);
+
+    AdviceDTO getAdvice(UUID id);
 
     Property getPropertyById(UUID id);
 
