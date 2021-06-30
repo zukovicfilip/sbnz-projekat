@@ -1,7 +1,25 @@
 <template>
   <div class="q-pa-md justify-center">
-    <div class="text-h4">{{ property.address }}
-      <q-btn class="q-ma-sm" outline color="primary" label="Buy this property" />
+    <div class="text-h4">
+      {{ property.address }}
+      <q-btn
+        class="q-ma-sm"
+        outline
+        color="primary"
+        v-if="!reservedByMe && !reserved && !sold"
+        @click="reserveProperty"
+        label="Reserve this property"
+      />
+      <q-btn
+        class="q-ma-sm"
+        outline
+        color="primary"
+        v-if="reservedByMe"
+        @click="cancelReservation"
+        label="Cancel reservation"
+      />
+      <span class="label bg-red text-white text-h6 q-pa-sm" v-if="reserved">This property is already reserved</span>
+      <span class="label bg-red text-white text-h6 q-pa-sm" v-if="sold">This property is already sold</span>
     </div>
     <q-card class="q-ma-md my-card">
       <q-card-section>
@@ -27,26 +45,76 @@
 
 <script>
 import PropertyService from "./../services/PropertyService";
+import BuyerService from "./../services/BuyerService";
+import {
+  createNegativeNotification,
+  createPositiveNotification
+} from "./../notifications/Notifications";
 export default {
   async beforeMount() {
-    let response = await PropertyService.getPropertyById(this.$route.params.id);
-    if (response.status === 200) {
-      this.property = response.data;
-    } else {
-    }
+    await this.getPropertyData();
     const detailsEvent = {
       propertyId: this.$route.params.id,
       userId: this.$store.state.id
-    }
-    console.log(detailsEvent)
-    await PropertyService.newDetailsEvent(detailsEvent)
+    };
+    console.log(detailsEvent);
+    await PropertyService.newDetailsEvent(detailsEvent);
   },
   data() {
     return {
-      property: {}
+      property: {},
+      reservedByMe: false,
+      reserved: false,
+      sold: false
     };
   },
   methods: {
+    async getPropertyData() {
+      this.reservedByMe = false
+      this.reserved = false
+      this.sold = false
+      let response = await PropertyService.getPropertyById(
+        this.$route.params.id
+      );
+      if (response.status === 200) {
+        this.property = response.data;
+        if (this.property.propertyStatus == "SOLD") {
+          this.sold = true;
+        } else if (this.property.propertyStatus == "RESERVED") {
+          if (this.property.reservedBy.id == this.$store.state.id) {
+            this.reservedByMe = true;
+          } else {
+            this.reserved = true;
+          }
+        }
+      } else {
+      }
+    },
+    async reserveProperty() {
+      let response = await BuyerService.reserveProperty(this.$store.state.id, this.$route.params.id);
+      if (response.status === 200) {
+        createPositiveNotification(
+          "You have successfully reserved this property!"
+        );
+        await this.getPropertyData();
+      } else {
+        createNegativeNotification("Failed to reserve this property...");
+      }
+    },
+    async cancelReservation() {
+      let response = await BuyerService.cancelReservation(
+        this.$store.state.id,
+        this.$route.params.id
+      );
+      if (response.status === 200) {
+        createPositiveNotification(
+          "You have successfully canceled reservation"
+        );
+        await this.getPropertyData();
+      } else {
+        createNegativeNotification("Failed to cancel reservation...");
+      }
+    }
   }
 };
 </script>

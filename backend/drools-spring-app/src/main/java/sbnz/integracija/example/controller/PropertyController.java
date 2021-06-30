@@ -7,10 +7,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import sbnz.integracija.example.controller.dto_mappers.DTOMapper;
 import sbnz.integracija.example.controller.dtos.*;
+import sbnz.integracija.example.model.enums.PropertyStatus;
 import sbnz.integracija.example.model.events.DetailsEvent;
 import sbnz.integracija.example.model.persistance.Property;
+import sbnz.integracija.example.model.persistance.PropertyReservation;
+import sbnz.integracija.example.model.persistance.User;
 import sbnz.integracija.example.model.search.ScoredProperty;
 import sbnz.integracija.example.service.PropertyService;
+import sbnz.integracija.example.service.SellingService;
+import sbnz.integracija.example.service.UserService;
 
 import java.util.*;
 
@@ -20,6 +25,12 @@ public class PropertyController {
 
     @Autowired
     private PropertyService propertyService;
+
+    @Autowired
+    private SellingService sellingService;
+
+    @Autowired
+    private UserService userService;
 
     @GetMapping
     public ResponseEntity<List<PropertyDTO>> getAllProperties() {
@@ -50,8 +61,14 @@ public class PropertyController {
     @GetMapping("/{id}")
     public ResponseEntity<PropertyDTO> getPropertyById(@PathVariable UUID id) {
         Property property = propertyService.getPropertyById(id);
+        PropertyDTO propertyDTO = DTOMapper.getPropertyDTO(property);
+        if(property.getPropertyStatus() == PropertyStatus.RESERVED) {
+            PropertyReservation propertyReservation = sellingService.getPendingPropertyReservation(id);
+            User user = userService.getUserById(propertyReservation.getUser().getId());
+            propertyDTO.setReservedBy(user);
+        }
 
-        return new ResponseEntity<>(DTOMapper.getPropertyDTO(property), HttpStatus.OK);
+        return new ResponseEntity<>(propertyDTO, HttpStatus.OK);
     }
 
     @PostMapping("/recommend-price")

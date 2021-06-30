@@ -2,7 +2,6 @@ package sbnz.integracija.example.service.implementation;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 import sbnz.integracija.example.model.enums.PropertyStatus;
 import sbnz.integracija.example.model.enums.ReservationStatus;
@@ -27,6 +26,10 @@ public class SellingServiceImpl implements SellingService {
 
     @Autowired
     private UserRepository userRepository;
+
+    public PropertyReservation getPendingPropertyReservation(UUID propertyId) {
+        return propertyReservationRepository.getPendingReservation(propertyId);
+    }
 
     @Override
     public boolean reserveProperty(UUID bId, UUID pId) {
@@ -55,7 +58,7 @@ public class SellingServiceImpl implements SellingService {
             return false;
 
         propertyRepository.changePropertyStatus(pId, PropertyStatus.FOR_SALE);
-        propertyReservationRepository.cancleReservation(bId, pId, ReservationStatus.CANCELED);
+        propertyReservationRepository.setReservationStatus(bId, pId, ReservationStatus.CANCELED);
 
         return true;
     }
@@ -68,7 +71,7 @@ public class SellingServiceImpl implements SellingService {
             return false;
 
         propertyRepository.changePropertyStatus(pId, PropertyStatus.SOLD);
-        propertyReservationRepository.cancleReservation(bId, pId, ReservationStatus.RESOLVED);
+        propertyReservationRepository.setReservationStatus(bId, pId, ReservationStatus.RESOLVED);
 
         return true;
     }
@@ -81,7 +84,7 @@ public class SellingServiceImpl implements SellingService {
             return false;
 
         propertyRepository.changePropertyStatus(pId, PropertyStatus.FOR_SALE);
-        propertyReservationRepository.cancleReservation(bId, pId, ReservationStatus.REFUSED);
+        propertyReservationRepository.setReservationStatus(bId, pId, ReservationStatus.REFUSED);
 
         return true;
     }

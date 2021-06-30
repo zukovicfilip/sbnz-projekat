@@ -1,8 +1,12 @@
 package sbnz.integracija.example.service;
 
+import sbnz.integracija.example.model.persistance.PropertyReservation;
+
 import java.util.UUID;
 
 public interface SellingService {
+
+    public PropertyReservation getPendingPropertyReservation(UUID propertyId);
 
     public boolean reserveProperty(UUID bId, UUID pId);
 

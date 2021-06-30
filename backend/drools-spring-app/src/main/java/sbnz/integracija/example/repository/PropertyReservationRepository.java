@@ -16,6 +16,9 @@ public interface PropertyReservationRepository extends JpaRepository<PropertyRes
     @Transactional
     @Modifying
     @Query("UPDATE property_reservation pr SET pr.reservationStatus = :reservationStatus WHERE pr.property.id = :pId AND pr.user.id = :bId AND pr.reservationStatus = 'PENDING'")
-    void cancleReservation(UUID bId, UUID pId, ReservationStatus reservationStatus);
+    void setReservationStatus(UUID bId, UUID pId, ReservationStatus reservationStatus);
+
+    @Query("SELECT pr FROM property_reservation pr WHERE pr.property.id = :propertyId AND pr.reservationStatus = 'PENDING'")
+    PropertyReservation getPendingReservation(UUID propertyId);
 
 }

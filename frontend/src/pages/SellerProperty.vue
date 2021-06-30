@@ -1,6 +1,36 @@
 <template>
   <div class="q-pa-md justify-center">
-    <div class="text-h4">{{ property.address }}</div>
+    <div class="text-h4">
+      {{ property.address }}
+      <span
+        class="label bg-red text-white text-h6 q-pa-sm"
+        v-if="property.propertyStatus == 'SOLD'"
+        >You have sold this property!</span
+      >
+    </div>
+    <q-card
+      class="q-ma-md my-card"
+      v-if="property.propertyStatus == 'RESERVED'"
+    >
+      <q-card-section>
+        <div class="text-h6">Pending property reservation</div>
+        <div class="text-left">{{ property.reservedBy.email }}</div>
+        <q-btn
+          class="q-ma-sm"
+          outline
+          color="white"
+          label="Resolve this reservation"
+          @click="resolveRequest"
+        />
+        <q-btn
+          class="q-ma-sm"
+          outline
+          color="white"
+          label="Refuse"
+          @click="refuseRequest"
+        />
+      </q-card-section>
+    </q-card>
     <q-card class="q-ma-md my-card">
       <q-card-section>
         <div class="text-h6">Info</div>
@@ -31,18 +61,14 @@
 
 <script>
 import PropertyService from "./../services/PropertyService";
+import BuyerService from "./../services/BuyerService";
+import {
+  createNegativeNotification,
+  createPositiveNotification
+} from "./../notifications/Notifications";
 export default {
   async beforeMount() {
-    let response = await PropertyService.getPropertyById(this.$route.params.id);
-    if (response.status === 200) {
-      this.property = response.data;
-    } else {
-    }
-    response = await PropertyService.getAdvice(this.$route.params.id);
-    if (response.status === 200) {
-      this.advice = response.data;
-    } else {
-    }
+    await this.getPropertyData();
   },
   data() {
     return {
@@ -50,7 +76,46 @@ export default {
       advice: {}
     };
   },
-  methods: {}
+  methods: {
+    async getPropertyData() {
+      let response = await PropertyService.getPropertyById(
+        this.$route.params.id
+      );
+      if (response.status === 200) {
+        this.property = response.data;
+      } else {
+      }
+      response = await PropertyService.getAdvice(this.$route.params.id);
+      if (response.status === 200) {
+        this.advice = response.data;
+      } else {
+      }
+    },
+    async resolveRequest() {
+      let response = await BuyerService.resolveReservation(
+        this.property.reservedBy.id,
+        this.$route.params.id
+      );
+      if (response.status === 200) {
+        createPositiveNotification("You have successfully sold this property!");
+        await this.getPropertyData();
+      } else {
+        createNegativeNotification("Failed to resolve...");
+      }
+    },
+    async refuseRequest() {
+      let response = await BuyerService.refuseReservation(
+        this.property.reservedBy.id,
+        this.$route.params.id
+      );
+      if (response.status === 200) {
+        createPositiveNotification("You have successfully refused!");
+        await this.getPropertyData();
+      } else {
+        createNegativeNotification("Failed to refuse...");
+      }
+    }
+  }
 };
 </script>
 

@@ -16,6 +16,7 @@ public class PropertyDTO {
     private int buildDate;
     private PropertyStatus propertyStatus;
     private User owner;
+    private User reservedBy;
 
     public PropertyDTO() {
     }
@@ -26,6 +27,14 @@ public class PropertyDTO {
 
     public void setPropertyStatus(PropertyStatus propertyStatus) {
         this.propertyStatus = propertyStatus;
+    }
+
+    public User getReservedBy() {
+        return reservedBy;
+    }
+
+    public void setReservedBy(User reservedBy) {
+        this.reservedBy = reservedBy;
     }
 
     public UUID getId() {
