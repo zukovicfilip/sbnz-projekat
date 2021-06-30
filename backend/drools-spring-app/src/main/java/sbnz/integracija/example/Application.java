@@ -3,6 +3,7 @@ package sbnz.integracija.example;
 import org.kie.api.KieServices;
 import org.kie.api.builder.KieScanner;
 import org.kie.api.runtime.KieContainer;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
@@ -10,13 +11,19 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import sbnz.integracija.example.service.FilesStorageService;
+
+import javax.annotation.Resource;
 
 @ConfigurationPropertiesScan
 @SpringBootApplication
 @EnableScheduling
 @EnableAsync
 @EnableWebSecurity
-public class Application {
+public class Application implements CommandLineRunner {
+
+	@Resource
+	FilesStorageService storageService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
@@ -32,4 +39,8 @@ public class Application {
 		return kContainer;
 	}
 
+	@Override
+	public void run(String... args) throws Exception {
+		storageService.init();
+	}
 }

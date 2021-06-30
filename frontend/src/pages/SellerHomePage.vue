@@ -23,7 +23,7 @@
     </div>
 
     <q-dialog v-model="addPropertyDialog" persistent>
-      <q-card style="min-width: 350px">
+      <q-card style="min-width: 800px">
         <q-card-section>
           <div class="text-h6">Add property</div>
         </q-card-section>
@@ -59,32 +59,25 @@
 
         <q-separator inset class="q-ma-sm" />
 
-        <q-card-section class="q-pt-none">
+        <q-card-section class="q-pt-none; row">
           <q-input
+            class="q-ma-sm"
             v-model.number="newProperty.surface"
             type="number"
             filled
             style="max-width: 200px"
             hint="Surface in m2"
           />
-        </q-card-section>
-
-        <q-separator inset class="q-ma-sm" />
-
-        <q-card-section class="q-pt-none">
           <q-input
+            class="q-ma-sm"
             v-model.number="newProperty.numberOfRooms"
             type="number"
             filled
             style="max-width: 200px"
             hint="Number of rooms"
           />
-        </q-card-section>
-
-        <q-separator inset class="q-ma-sm" />
-
-        <q-card-section class="q-pt-none">
           <q-input
+            class="q-ma-sm"
             v-model.number="newProperty.buildDate"
             type="number"
             filled
@@ -94,6 +87,7 @@
         </q-card-section>
 
         <q-separator inset class="q-ma-sm" />
+
 
         <q-card-section class="q-pt-none; row">
           <q-input
@@ -115,7 +109,7 @@
 
         <q-card-actions align="right" class="text-primary">
           <q-btn flat label="Cancel" v-close-popup />
-          <q-btn flat label="Add" @click="addMyProperty"/>
+          <q-btn flat label="Add" @click="addMyProperty" />
         </q-card-actions>
       </q-card>
     </q-dialog>
@@ -127,7 +121,10 @@ import PropertyCard from "./../components/PropertyCard";
 import SellerService from "./../services/SellerService";
 import PropertyService from "./../services/PropertyService";
 import { errorFetchingData } from "./../notifications/globalErrors";
-import { createNegativeNotification, createPositiveNotification } from "./../notifications/Notifications";
+import {
+  createNegativeNotification,
+  createPositiveNotification
+} from "./../notifications/Notifications";
 
 export default {
   components: { PropertyCard },
@@ -161,31 +158,36 @@ export default {
       }
     },
     async addMyProperty() {
-      if (this.isNewPropertyInfoIncomplete() || this.newProperty.pricePerSquareM == "") {
-        createNegativeNotification("Enter all fields first!")
+      if (
+        this.isNewPropertyInfoIncomplete() ||
+        this.newProperty.pricePerSquareM == ""
+      ) {
+        createNegativeNotification("Enter all fields first!");
         return;
       }
       let response = await SellerService.addMyProperty(this.newProperty);
       if (response.status === 200) {
-        createPositiveNotification("Successfully added new property")
-        this.addPropertyDialog = false
+        createPositiveNotification("Successfully added new property");
+        this.addPropertyDialog = false;
         this.properties.push(response.data);
       } else {
         errorFetchingData();
       }
     },
     async recommendPrice() {
-      console.log(this.newProperty)
+      console.log(this.newProperty);
       if (this.isNewPropertyInfoIncomplete()) {
-        createNegativeNotification("Enter all other fields first!")
+        createNegativeNotification("Enter all other fields first!");
         return;
       }
       let response = await PropertyService.recommendPrice(this.newProperty);
       if (response.status === 200) {
         this.newProperty = response.data;
       } else {
-        this.newProperty.pricePerSquareM = "0"
-        createNegativeNotification("We cant recommend price because there are no similiar properties...")
+        this.newProperty.pricePerSquareM = "0";
+        createNegativeNotification(
+          "We cant recommend price because there are no similiar properties..."
+        );
       }
     },
     isNewPropertyInfoIncomplete() {
@@ -212,7 +214,7 @@ export default {
       };
     },
     openAddPropertyDialog() {
-      this.resetNewPropertyInfo()
+      this.resetNewPropertyInfo();
       this.addPropertyDialog = true;
     }
   }

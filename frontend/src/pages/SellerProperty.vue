@@ -56,6 +56,14 @@
         <div class="text-left">{{ advice.priceAdvice }}</div>
       </q-card-section>
     </q-card>
+    <q-uploader
+      class="q-ma-md"
+      :url="uploadUrl"
+      label="Upload images"
+      multiple
+      batch
+      style="max-width: 300px"
+    />
   </div>
 </template>
 
@@ -69,11 +77,13 @@ import {
 export default {
   async beforeMount() {
     await this.getPropertyData();
+    this.uploadUrl = "http://localhost:8080/property/" + this.$route.params.id + "/upload"
   },
   data() {
     return {
       property: {},
-      advice: {}
+      advice: {},
+      uploadUrl: ""
     };
   },
   methods: {

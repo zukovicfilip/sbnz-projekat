@@ -42,7 +42,7 @@ export default {
       return moment(date).format("LL");
     },
     propertyInfo() {
-      this.$router.push("seller/property/" + this.property.id);
+      this.$router.push("property/" + this.property.id);
     }
   }
 };
