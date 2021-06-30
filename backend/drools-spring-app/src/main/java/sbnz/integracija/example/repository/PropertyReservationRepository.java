@@ -4,9 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
-import sbnz.integracija.example.model.enums.PropertyStatus;
 import sbnz.integracija.example.model.enums.ReservationStatus;
-import sbnz.integracija.example.model.persistance.Property;
 import sbnz.integracija.example.model.persistance.PropertyReservation;
 
 import java.util.UUID;

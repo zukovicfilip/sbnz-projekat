@@ -14,4 +14,7 @@
 	<kbase name="Rulset4" packages="advice" equalsBehavior="equality" eventProcessingMode="stream">
 	</kbase>
 
+	<kbase name="Rulset5" packages="commission">
+	</kbase>
+
 </kmodule>

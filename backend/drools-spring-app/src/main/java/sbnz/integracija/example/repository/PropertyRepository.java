@@ -26,4 +26,7 @@ public interface PropertyRepository extends JpaRepository<Property, UUID> {
     @Query("UPDATE property p SET p.propertyStatus = :propertyStatus WHERE p.id = :propertyId")
     void changePropertyStatus(UUID propertyId, PropertyStatus propertyStatus);
 
+    @Query("SELECT p FROM property p JOIN FETCH p.owner o WHERE o.id = :sellerId and p.propertyStatus = 'SOLD'")
+    List<Property> getAllSoldFromSeller(UUID sellerId);
+
 }

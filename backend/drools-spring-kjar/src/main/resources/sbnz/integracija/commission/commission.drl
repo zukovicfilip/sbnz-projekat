@@ -1,0 +1,73 @@
+package sbnz.integracija;
+dialect  "mvel"
+
+import sbnz.integracija.example.controller.dtos.CommissionDTO
+import sbnz.integracija.example.model.enums.SellerCategory
+
+import java.util.List;
+
+rule "Is silver?"
+    agenda-group "commission"
+    when
+        $soldProperties: List()
+        $commissionDTO: CommissionDTO(
+            $totalPrice: totalPrice,
+            $commission: commission,
+            $commissionFee: commissionFee,
+            $numberOfSoldProperties: numberOfSoldProperties,
+            $sellerCategory: sellerCategory
+        )
+        eval($soldProperties.size() < 10)
+    then
+        System.out.println("SILVER STATUS");
+        $commissionDTO.setSellerCategory(SellerCategory.SILVER);
+        $commissionDTO.setCommission(10.0);
+        $commissionDTO.setCommissionFee(($commissionDTO.getTotalPrice() / 100) * $commissionDTO.getCommission());
+        $commissionDTO.setNumberOfSoldProperties($soldProperties.size());
+        update($commissionDTO);
+        drools.halt();
+end
+
+rule "Is gold?"
+    agenda-group "commission"
+    when
+        $soldProperties: List()
+        $commissionDTO: CommissionDTO(
+            $totalPrice: totalPrice,
+            $commission: commission,
+            $commissionFee: commissionFee,
+            $numberOfSoldProperties: numberOfSoldProperties,
+            $sellerCategory: sellerCategory
+        )
+        eval($soldProperties.size() >= 10 && $soldProperties.size() < 20)
+    then
+        System.out.println("GOLD STATUS");
+        $commissionDTO.setSellerCategory(SellerCategory.GOLD);
+        $commissionDTO.setCommission(7.5);
+        $commissionDTO.setCommissionFee(($commissionDTO.getTotalPrice() / 100) * $commissionDTO.getCommission());
+        $commissionDTO.setNumberOfSoldProperties($soldProperties.size());
+        update($commissionDTO);
+        drools.halt();
+end
+
+rule "Is platinum?"
+    agenda-group "commission"
+    when
+        $soldProperties: List()
+        $commissionDTO: CommissionDTO(
+            $totalPrice: totalPrice,
+            $commission: commission,
+            $commissionFee: commissionFee,
+            $numberOfSoldProperties: numberOfSoldProperties,
+            $sellerCategory: sellerCategory
+        )
+        eval($soldProperties.size() >= 20)
+    then
+        System.out.println("PLATINUM STATUS");
+        $commissionDTO.setSellerCategory(SellerCategory.PLATINUM);
+        $commissionDTO.setCommission(5.0);
+        $commissionDTO.setCommissionFee(($commissionDTO.getTotalPrice() / 100) * $commissionDTO.getCommission());
+        $commissionDTO.setNumberOfSoldProperties($soldProperties.size());
+        update($commissionDTO);
+        drools.halt();
+end

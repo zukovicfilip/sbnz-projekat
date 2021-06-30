@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import sbnz.integracija.example.controller.dtos.AdviceDTO;
+import sbnz.integracija.example.controller.dtos.CommissionDTO;
 import sbnz.integracija.example.service.SellingService;
 
 import java.util.UUID;
@@ -35,11 +36,12 @@ public class BuyerController {
     }
 
     @PostMapping("/{bId}/reserve/{pId}/resolve")
-    public ResponseEntity resolveReservation(@PathVariable UUID bId, @PathVariable UUID pId) {
-        if(sellingService.resolveReservation(bId, pId)) {
-            return new ResponseEntity(HttpStatus.OK);
+    public ResponseEntity<CommissionDTO> resolveReservation(@PathVariable UUID bId, @PathVariable UUID pId) {
+        CommissionDTO commissionDTO = sellingService.resolveReservation(bId, pId);
+        if(commissionDTO != null) {
+            return new ResponseEntity(commissionDTO, HttpStatus.OK);
         } else {
-            return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
