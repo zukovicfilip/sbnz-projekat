@@ -64,6 +64,21 @@
       batch
       style="max-width: 300px"
     />
+    <q-carousel
+      class="q-ma-md"
+      animated
+      v-model="slide"
+      arrows
+      navigation
+      infinite
+    >
+      <q-carousel-slide
+        v-for="(image, index) in property.images"
+        :key="index"
+        :name="index"
+        :img-src="image.url"
+      ></q-carousel-slide>
+    </q-carousel>
   </div>
 </template>
 
@@ -77,13 +92,15 @@ import {
 export default {
   async beforeMount() {
     await this.getPropertyData();
-    this.uploadUrl = "http://localhost:8080/property/" + this.$route.params.id + "/upload"
+    this.uploadUrl =
+      "http://localhost:8080/property/" + this.$route.params.id + "/upload";
   },
   data() {
     return {
       property: {},
       advice: {},
-      uploadUrl: ""
+      uploadUrl: "",
+      slide: 1
     };
   },
   methods: {

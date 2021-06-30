@@ -1,9 +1,11 @@
 package sbnz.integracija.example.controller.dtos;
 
+import sbnz.integracija.example.model.FileInfo;
 import sbnz.integracija.example.model.enums.PropertyStatus;
 import sbnz.integracija.example.model.persistance.Coordinates;
 import sbnz.integracija.example.model.persistance.User;
 
+import java.util.List;
 import java.util.UUID;
 
 public class PropertyDTO {
@@ -17,6 +19,7 @@ public class PropertyDTO {
     private PropertyStatus propertyStatus;
     private User owner;
     private User reservedBy;
+    private List<FileInfo> images;
 
     public PropertyDTO() {
     }
@@ -27,6 +30,14 @@ public class PropertyDTO {
 
     public void setPropertyStatus(PropertyStatus propertyStatus) {
         this.propertyStatus = propertyStatus;
+    }
+
+    public List<FileInfo> getImages() {
+        return images;
+    }
+
+    public void setImages(List<FileInfo> images) {
+        this.images = images;
     }
 
     public User getReservedBy() {

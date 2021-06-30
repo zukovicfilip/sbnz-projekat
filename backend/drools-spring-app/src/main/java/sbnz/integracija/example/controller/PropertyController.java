@@ -5,19 +5,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 import sbnz.integracija.example.controller.dto_mappers.DTOMapper;
 import sbnz.integracija.example.controller.dtos.*;
+import sbnz.integracija.example.model.FileInfo;
 import sbnz.integracija.example.model.enums.PropertyStatus;
 import sbnz.integracija.example.model.events.DetailsEvent;
 import sbnz.integracija.example.model.persistance.Property;
 import sbnz.integracija.example.model.persistance.PropertyReservation;
 import sbnz.integracija.example.model.persistance.User;
 import sbnz.integracija.example.model.search.ScoredProperty;
+import sbnz.integracija.example.service.FilesStorageService;
 import sbnz.integracija.example.service.PropertyService;
 import sbnz.integracija.example.service.SellingService;
 import sbnz.integracija.example.service.UserService;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = "/api/property")
@@ -31,6 +35,9 @@ public class PropertyController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    FilesStorageService storageService;
 
     @GetMapping
     public ResponseEntity<List<PropertyDTO>> getAllProperties() {
@@ -67,6 +74,22 @@ public class PropertyController {
             User user = userService.getUserById(propertyReservation.getUser().getId());
             propertyDTO.setReservedBy(user);
         }
+
+        List<FileInfo> fileInfos = storageService.loadAll().map(path -> {
+            String filename = path.getFileName().toString();
+            String url = MvcUriComponentsBuilder
+                    .fromMethodName(FilesController.class, "getFile", path.getFileName().toString()).build().toString();
+
+            return new FileInfo(filename, url);
+        }).collect(Collectors.toList());
+
+        List<FileInfo> propertyFileInfos = new ArrayList<>();
+
+        for(FileInfo fileInfo : fileInfos)
+            if(fileInfo.getName().contains(id.toString()))
+                propertyFileInfos.add(fileInfo);
+
+        propertyDTO.setImages(propertyFileInfos);
 
         return new ResponseEntity<>(propertyDTO, HttpStatus.OK);
     }

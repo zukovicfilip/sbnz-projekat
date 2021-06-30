@@ -36,10 +36,6 @@ public class FilesController {
                 storageService.save(propertyId, file);
                 fileNames.add(propertyId.toString() + '_' + file.getOriginalFilename());
             }
-//            Arrays.asList(files).stream().forEach(file -> {
-//                storageService.save(propertyId, file);
-//                fileNames.add(propertyId.toString() + '_' + file.getOriginalFilename());
-//            });
 
             message = "Uploaded the files successfully: " + fileNames;
             return ResponseEntity.status(HttpStatus.OK).body(new ResponseMessage(message));
